@@ -306,14 +306,17 @@
 .menu-close {
   position: absolute;
   top: 50%;
-  right: 24px;
+  right: 20px;
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
   opacity: 0;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .menu-container.expanded .menu-close {
