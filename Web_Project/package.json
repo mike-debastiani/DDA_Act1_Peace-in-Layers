@@ -1,0 +1,26 @@
+{
+  "name": "web-project",
+  "version": "1.0.0",
+  "description": "Vanilla HTML/JS project with Tailwind CSS",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx live-server --port=3000 --open=/index.html",
+    "dev": "npx live-server --port=3000 --open=/index.html --watch=.",
+    "serve": "python3 -m http.server 8000",
+    "serve-alt": "npx http-server -p 8000 -o"
+  },
+  "keywords": [
+    "vanilla",
+    "html",
+    "javascript",
+    "tailwind",
+    "css"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {}
+}
