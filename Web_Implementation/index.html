@@ -3,13 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Button Collection - Design System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wdth,wght@0,75..100,100..700;1,75..100,100..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="GlobalStyles.css">
 </head>
 <body>
-    <h1 class="text-bold-3xl">hello world</h1>
+    <div style="padding: 40px; max-width: 1200px; margin: 0 auto;">
+        <h1 class="text-bold-3xl" style="margin-bottom: 40px;">Button Collection</h1>
+        
+        <!-- Primary Button -->
+        <section style="margin-bottom: 40px;">
+            <h2 class="text-medium-lg" style="margin-bottom: 12px;">Primary Button</h2>
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <button class="btn btn-primary">
+                    <img src="src/icons/introIcon.svg" alt="Intro Icon" class="btn-icon" style="width: 41px; height: 9px;">
+                    Intro
+                </button>
+            </div>
+        </section>
+
+        <!-- Secondary Button -->
+        <section style="margin-bottom: 40px;">
+            <h2 class="text-medium-lg" style="margin-bottom: 12px;">Secondary Button</h2>
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <button class="btn btn-secondary">
+                    <img src="src/icons/backArrowIcon.svg" alt="Back Icon" class="btn-icon" style="width: 13px; height: 24px;">
+                    Back to Communities
+                </button>
+            </div>
+        </section>
+
+        <!-- Expanding Navigation Menu -->
+        <section style="margin-bottom: 40px;">
+            <h2 class="text-medium-lg" style="margin-bottom: 12px;">Expanding Navigation Menu</h2>
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <div class="menu-toggle">
+                    <div class="menu-container" id="menuContainer">
+                        <button class="menu-button" id="menuToggleBtn">
+                            <img src="src/icons/hamburgerMenuIcon.svg" alt="Menu" class="menu-icon" style="width: 28px; height: 18px;">
+                        </button>
+                        
+                        <div class="menu-content">
+                            <a href="#" class="menu-item">Home</a>
+                            <a href="#" class="menu-item">Credits</a>
+                            <div class="menu-item-with-arrow">
+                                <a href="#" class="menu-item">Language</a>
+                                <img src="src/icons/dropdownArrowIcon.svg" alt="Dropdown" style="width: 16px; height: 9px;">
+                            </div>
+                        </div>
+                        
+                        <img src="src/icons/closeIcon.svg" alt="Close" class="menu-close" id="menuCloseBtn">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Show All Buttons -->
+        <section style="margin-bottom: 40px;">
+            <h2 class="text-medium-lg" style="margin-bottom: 24px;">Show all / less Buttons</h2>
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <button class="btn btn-show-all" id="showToggleBtn">
+                    <span class="toggle-text">show all</span>
+                    <img src="src/icons/dropdownArrowIcon.svg" alt="Dropdown" class="btn-icon toggle-arrow" style="width: 17px; height: 9px;">
+                </button>
+            </div>
+        </section>
+
+        <!-- Segmented Zoom Control -->
+        <section style="margin-bottom: 40px;">
+            <h2 class="text-medium-lg" style="margin-bottom: 24px;">Segmented Zoom Control</h2>
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <div class="btn-group">
+                    <button class="btn btn-segmented active">
+                        <img src="src/icons/checkIcon.svg" alt="Check" class="btn-icon check-icon" style="width: 14px; height: 11px;">
+                        1.0x
+                    </button>
+                    <button class="btn btn-segmented">
+                        <img src="src/icons/checkIcon.svg" alt="Check" class="btn-icon check-icon" style="width: 14px; height: 11px;">
+                        1.5x
+                    </button>
+                    <button class="btn btn-segmented">
+                        <img src="src/icons/checkIcon.svg" alt="Check" class="btn-icon check-icon" style="width: 14px; height: 11px;">
+                        2.0x
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Add interactive functionality for segmented controls
+        document.addEventListener('DOMContentLoaded', function() {
+            const segmentedButtons = document.querySelectorAll('.btn-segmented');
+            
+            segmentedButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from siblings
+                    const group = this.closest('.btn-group');
+                    if (group) {
+                        group.querySelectorAll('.btn-segmented').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                    }
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                });
+            });
+
+            // Add toggle functionality for show more/less button
+            const showToggleBtn = document.getElementById('showToggleBtn');
+            const toggleText = showToggleBtn.querySelector('.toggle-text');
+            
+            showToggleBtn.addEventListener('click', function() {
+                if (this.classList.contains('show-less')) {
+                    // Currently showing "show less", switch to "show all"
+                    this.classList.remove('show-less');
+                    toggleText.textContent = 'show all';
+                } else {
+                    // Currently showing "show all", switch to "show less"
+                    this.classList.add('show-less');
+                    toggleText.textContent = 'show less';
+                }
+            });
+
+            // Add expanding menu functionality
+            const menuToggleBtn = document.getElementById('menuToggleBtn');
+            const menuContainer = document.getElementById('menuContainer');
+            const menuCloseBtn = document.getElementById('menuCloseBtn');
+            
+            // Toggle menu expansion on hamburger click
+            menuToggleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menuContainer.classList.toggle('expanded');
+            });
+            
+            // Close menu on close button click
+            menuCloseBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menuContainer.classList.remove('expanded');
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!menuContainer.contains(e.target)) {
+                    menuContainer.classList.remove('expanded');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
