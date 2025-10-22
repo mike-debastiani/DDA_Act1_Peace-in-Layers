@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peace in Layers – Intro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wdth,wght@0,75..100,100..700;1,75..100,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="GlobalStyles.css" />
+    <!-- Intro-only styles (loaded after so they can override) -->
+    <link rel="stylesheet" href="intro.css" />
+  </head>
+  <body>
+    <header class="intro-header">
+      <!-- LEFT Menu -->
+      <button class="btn btn-secondary">
+        <img src="src/icons/backArrowIcon.svg" alt="Back Icon" class="btn-icon" style="width: 13px; height: 24px" />
+        Back to Communities
+      </button>
+
+      <!-- RIGHT Menu group -->
+      <div class="header-right">
+        <button class="btn btn-primary">
+          <img src="src/icons/introIcon.svg" alt="Intro Icon" class="btn-icon" style="width: 41px; height: 9px" />
+          Intro
+        </button>
+
+        <div class="menu-toggle">
+          <div class="menu-container" id="menuContainer">
+            <button class="menu-button" id="menuToggleBtn">
+              <img src="src/icons/hamburgerMenuIcon.svg" alt="Menu" class="menu-icon" style="width: 28px; height: 18px" />
+            </button>
+
+            <div class="menu-content">
+              <a href="#" class="menu-item">Home</a>
+              <a href="#" class="menu-item">Credits</a>
+              <div class="menu-item-with-arrow">
+                <a href="#" class="menu-item">Language</a>
+                <img src="src/icons/dropdownArrowIcon.svg" alt="Dropdown" style="width: 16px; height: 9px" />
+              </div>
+            </div>
+
+            <img src="src/icons/closeIcon.svg" alt="Close" class="menu-close" id="menuCloseBtn" />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- rest of your page -->
+    <div class="intro-wrapper">
+      <!-- SECTION 1 -->
+      <section class="intro-section is-active">
+        <div class="intro-image">
+          <img src="assets/images/intro-map-1.png" alt="Map 1" />
+          <div class="intro-text">
+            <h1 class="text-medium-5xl">Between the Frontlines</h1>
+            <p class="text-base">The city of Mostar, located in present-day Bosnia and Herzegovina...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2 -->
+      <section class="intro-section">
+        <div class="intro-image">
+          <img src="assets/images/intro-map-2.png" alt="Map 2" />
+          <div class="intro-text">
+            <h1 class="text-medium-5xl">A Divided City</h1>
+            <p class="text-base">
+              After the war, the Neretva River became the city’s unofficial ethnic boundary. Among Muslim Bosniaks, Catholic Croats, and the small
+              Orthodox Serb minority, divisions remain tangible today. The city is still largely divided along ethnic lines, with separate
+              neighborhoods and parallel school systems. These invisible borders continue to shape daily life, reflecting the enduring legacy of the
+              war. Today however, many residents resist the notion of Mostar as a “divided city.”
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 3 -->
+      <section class="intro-section">
+        <div class="intro-image">
+          <img src="assets/images/intro-map-3.png" alt="Map 3" />
+          <div class="intro-text">
+            <h1 class="text-medium-5xl">Building Peace</h1>
+            <p class="text-base">
+              After the war, symbolic reconstruction projects such as the Old Bridge (Stari Most) were extensively funded by the European Union. The
+              bridge, once destroyed during the conflict, became a global emblem of reconciliation and renewal. But beyond these symbols — what does
+              genuine peace look like for the people of Mostar?
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 4 -->
+      <section class="intro-section">
+        <div class="intro-image">
+          <img src="assets/images/intro-map-4.png" alt="Map 4" />
+          <div class="intro-text">
+            <h1 class="text-medium-5xl">How to Search for Peace</h1>
+            <p class="text-base">
+              The Everyday Peace Indicators (EPI) research explores how people themselves understand peace, not through political agreements or
+              external measures, but through the small signs of everyday life.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="intro-nav" role="navigation" aria-label="Intro navigation">
+      <!-- PREVIOUS -->
+      <button class="btn btn-secondary nav-prev">
+        <img src="src/icons/backArrowIcon.svg" alt="Previous" class="btn-icon" style="width: 13px; height: 24px" />
+        Previous
+      </button>
+
+      <!-- STEPS -->
+      <ol class="intro-steps" role="list">
+        <li class="step is-active" aria-current="step" aria-label="Slide 1"></li>
+        <li class="step" aria-label="Slide 2"></li>
+        <li class="step" aria-label="Slide 3"></li>
+        <li class="step" aria-label="Slide 4"></li>
+      </ol>
+
+      <!-- NEXT -->
+      <button class="btn btn-secondary nav-next">
+        Next
+        <img src="src/icons/backArrowIcon.svg" alt="Next" class="btn-icon next-icon" style="width: 13px; height: 24px" />
+      </button>
+    </div>
+    <script>
+      const sections = document.querySelectorAll(".intro-section");
+      const steps = document.querySelectorAll(".step");
+      const prevBtn = document.querySelector(".nav-prev");
+      const nextBtn = document.querySelector(".nav-next");
+
+      let currentIndex = 0;
+
+      function showSection(index) {
+        sections.forEach((sec, i) => {
+          sec.classList.toggle("is-active", i === index);
+          steps[i]?.classList.toggle("is-active", i === index);
+        });
+      }
+
+      nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % sections.length;
+        showSection(currentIndex);
+      });
+
+      prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + sections.length) % sections.length;
+        showSection(currentIndex);
+      });
+
+      steps.forEach((step, i) => {
+        step.addEventListener("click", () => {
+          currentIndex = i;
+          showSection(currentIndex);
+        });
+      });
+    </script>
+  </body>
+</html>
