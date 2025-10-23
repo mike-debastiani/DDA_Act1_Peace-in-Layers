@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peace in Layers – Community Data</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wdth,wght@0,75..100,100..700;1,75..100,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="GlobalStyles.css">
+    <link rel="stylesheet" href="intro.css">
+</head>
+<body>
+    <header class="intro-header">
+        <!-- LEFT Menu -->
+        <button class="btn btn-secondary">
+            <img src="src/icons/backArrowIcon.svg" alt="Back Icon" class="btn-icon" style="width: 13px; height: 24px" />
+            Back to Communities
+        </button>
+
+        <!-- RIGHT Menu group -->
+        <div class="header-right">
+            <button class="btn btn-primary">
+                <img src="src/icons/introIcon.svg" alt="Intro Icon" class="btn-icon" style="width: 41px; height: 9px" />
+                Intro
+            </button>
+
+            <div class="menu-toggle">
+                <div class="menu-container" id="menuContainer">
+                    <button class="menu-button" id="menuToggleBtn">
+                        <img src="src/icons/hamburgerMenuIcon.svg" alt="Menu" class="menu-icon" style="width: 28px; height: 18px" />
+                    </button>
+
+                    <div class="menu-content">
+                        <a href="#" class="menu-item">Home</a>
+                        <a href="#" class="menu-item">Credits</a>
+                        <div class="menu-item-with-arrow">
+                            <a href="#" class="menu-item">Language</a>
+                            <img src="src/icons/dropdownArrowIcon.svg" alt="Dropdown" style="width: 16px; height: 9px" />
+                        </div>
+                    </div>
+
+                    <img src="src/icons/closeIcon.svg" alt="Close" class="menu-close" id="menuCloseBtn" />
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Community Data Sections -->
+    <div class="intro-wrapper">
+        <!-- SECTION 1 - Potoci -->
+        <section class="intro-section is-active">
+            <div class="community-card">
+                <div class="community-details">
+                    <div class="community-header">
+                        <h2 class="community-name">Potoci</h2>
+                        <div class="vote-count">0000 total votes</div>
+                    </div>
+                    <div class="community-description">
+                        <p>Potoci is a <b>mixed rural</b> community north of Mostar, home to Bosniak, Croat and Serb residents. Surrounded by farmland and hills, it reflects both the diversity and complexity of post-war coexistence where daily routines intertwine with lingering memories of displacement.</p>
+                    </div>
+                    <div class="impressions-section">
+                        <div class="impressions-header">
+                            <h2 class="impressions-title">Impressions</h2>
+                            <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
+                                <span>show full Photostory</span>
+                                <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
+                            </a>
+                        </div>
+                        <div class="impressions-grid">
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary community-data-btn">Show Data of Potoci</button>
+                </div>
+                <div class="map-container">
+                    <img src="assets/Maps/MapPotoci.png" alt="Potoci Map" class="map-image" />
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 - Community 2 -->
+        <section class="intro-section">
+            <div class="community-card">
+                <div class="community-details">
+                    <div class="community-header">
+                        <h2 class="community-name">Zalik</h2>
+                        <div class="vote-count">0000 total votes</div>
+                    </div>
+                    <div class="community-description">
+                        <p>Zalik is an <b>urban neighborhood</b> in northern Mostar with a <b>predominantly Bosniak</b> population. Once heavily affected by the war, it has since developed into a lively residential area. Community life centers around schools, local markets and public spaces that represent both resilience and a desire for normalcy.</p>
+                    </div>
+                    <div class="impressions-section">
+                        <div class="impressions-header">
+                            <h2 class="impressions-title">Impressions</h2>
+                            <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
+                                <span>show full Photostory</span>
+                                <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
+                            </a>
+                        </div>
+                        <div class="impressions-grid">
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary community-data-btn">Show Data of Zalik</button>
+                </div>
+                <div class="map-container">
+                    <img src="assets/Maps/MapZalik.png" alt="Zalik Map" class="map-image" />
+                </div>
+            </div>
+        </section>
+        <!-- SECTION 3 - Cim -->
+        <section class="intro-section">
+            <div class="community-card">
+                <div class="community-details">
+                    <div class="community-header">
+                        <h2 class="community-name">Cim</h2>
+                        <div class="vote-count">0000 total votes</div>
+                    </div>
+                    <div class="community-description">
+                        <p>Cim lies on the western <b>outskirts of Mostar</b> and is <b>primarily Croat</b>. Combining suburban housing with open landscapes, it offers a quieter rhythm of life. The community maintains strong local traditions while slowly reconnecting with the broader urban fabric of Mostar.</p>
+                    </div>
+                    <div class="impressions-section">
+                        <div class="impressions-header">
+                            <h2 class="impressions-title">Impressions</h2>
+                            <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
+                                <span>show full Photostory</span>
+                                <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
+                            </a>
+                        </div>
+                        <div class="impressions-grid">
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary community-data-btn">Show Data of Cim</button>
+                </div>
+                <div class="map-container">
+                    <img src="assets/Maps/MapCim.png" alt="Cim Map" class="map-image" />
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4 - Cernica -->
+        <section class="intro-section">
+            <div class="community-card">
+                <div class="community-details">
+                    <div class="community-header">
+                        <h2 class="community-name">Cernica</h2>
+                        <div class="vote-count">0000 total votes</div>
+                    </div>
+                    <div class="community-description">
+                        <p>Cernica is an <b>old urban neighborhood</b> in central Mostar with a <b>mainly Bosniak</b> population. Its narrow streets and historic buildings reflect the city's pre-war character. Despite its central location, Cernica still bears traces of wartime damage but remains a hub of everyday social life.</p>
+                    </div>
+                    <div class="impressions-section">
+                        <div class="impressions-header">
+                            <h2 class="impressions-title">Impressions</h2>
+                            <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
+                                <span>show full Photostory</span>
+                                <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
+                            </a>
+                        </div>
+                        <div class="impressions-grid">
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary community-data-btn">Show Data of Cernica</button>
+                </div>
+                <div class="map-container">
+                    <img src="assets/Maps/MapCernica.png" alt="Cernica Map" class="map-image" />
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5 - Bijeli Brijeg -->
+        <section class="intro-section">
+            <div class="community-card">
+                <div class="community-details">
+                    <div class="community-header">
+                        <h2 class="community-name">Bijeli Brijeg</h2>
+                        <div class="vote-count">0000 total votes</div>
+                    </div>
+                    <div class="community-description">
+                        <p>Bijeli Brijeg is a <b>central-western part</b> of Mostar and one of the city's <b>key Croat neighborhoods</b>. Closely tied to cultural and sports life, especially the local football club, it symbolizes both strong community identity and the persistence of ethnic divisions in the city.</p>
+                    </div>
+                    <div class="impressions-section">
+                        <div class="impressions-header">
+                            <h2 class="impressions-title">Impressions</h2>
+                            <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
+                                <span>show full Photostory</span>
+                                <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
+                            </a>
+                        </div>
+                        <div class="impressions-grid">
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary community-data-btn">Show Data of Bijeli Brijeg</button>
+                </div>
+                <div class="map-container">
+                    <img src="assets/Maps/MapBijeliBrijeg.png" alt="Bijeli Brijeg Map" class="map-image" />
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6 - Podhum -->
+        <section class="intro-section">
+            <div class="community-card">
+                <div class="community-details">
+                    <div class="community-header">
+                        <h2 class="community-name">Podhum</h2>
+                        <div class="vote-count">0000 total votes</div>
+                    </div>
+                    <div class="community-description">
+                        <p>Podhum is a <b>small urban area</b> on the western side of Mostar with a <b>predominantly Croat</b> population. Once shaped by displacement during the war, it has gradually rebuilt its infrastructure and community spaces, balancing everyday normality with memories of separation.</p>
+                    </div>
+                    <div class="impressions-section">
+                        <div class="impressions-header">
+                            <h2 class="impressions-title">Impressions</h2>
+                            <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
+                                <span>show full Photostory</span>
+                                <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
+                            </a>
+                        </div>
+                        <div class="impressions-grid">
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary community-data-btn">Show Data of Podhum</button>
+                </div>
+                <div class="map-container">
+                    <img src="assets/Maps/MapPodhum.png" alt="Podhum Map" class="map-image" />
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7 - Blagaj -->
+        <section class="intro-section">
+            <div class="community-card">
+                <div class="community-details">
+                    <div class="community-header">
+                        <h2 class="community-name">Blagaj</h2>
+                        <div class="vote-count">000 total votes</div>
+                    </div>
+                    <div class="community-description">
+                        <p>Blagaj is a <b>semi-rural community</b> south of Mostar, known for its scenic setting and historic Dervish monastery by the Buna River. <b>Predominantly Bosniak</b>, it reflects a strong cultural and religious heritage while offering a calmer, more cohesive rhythm of life beyond the city's divisions.</p>
+                    </div>
+                    <div class="impressions-section">
+                        <div class="impressions-header">
+                            <h2 class="impressions-title">Impressions</h2>
+                            <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
+                                <span>show full Photostory</span>
+                                <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
+                            </a>
+                        </div>
+                        <div class="impressions-grid">
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                            <div class="impressions-column">
+                                <div class="impression-image placeholder-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary community-data-btn">Show Data of Blagaj</button>
+                </div>
+                <div class="map-container">
+                    <img src="assets/Maps/MapBlagaj.png" alt="Blagaj Map" class="map-image" />
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Navigation -->
+    <div class="intro-nav" role="navigation" aria-label="Community navigation">
+        <!-- PREVIOUS -->
+        <button class="btn btn-secondary nav-prev">
+            <img src="src/icons/backArrowIcon.svg" alt="Previous" class="btn-icon" style="width: 13px; height: 24px" />
+            Previous
+        </button>
+
+        <!-- STEPS -->
+        <ol class="intro-steps" role="list">
+            <li class="step is-active" aria-current="step" aria-label="Slide 1"></li>
+            <li class="step" aria-label="Slide 2"></li>
+            <li class="step" aria-label="Slide 3"></li>
+            <li class="step" aria-label="Slide 4"></li>
+            <li class="step" aria-label="Slide 5"></li>
+            <li class="step" aria-label="Slide 6"></li>
+            <li class="step" aria-label="Slide 7"></li>
+        </ol>
+
+        <!-- NEXT -->
+        <button class="btn btn-secondary nav-next">
+            Next
+            <img src="src/icons/backArrowIcon.svg" alt="Next" class="btn-icon next-icon" style="width: 13px; height: 24px" />
+        </button>
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll(".intro-section");
+        const steps = document.querySelectorAll(".step");
+        const prevBtn = document.querySelector(".nav-prev");
+        const nextBtn = document.querySelector(".nav-next");
+
+        let currentIndex = 0;
+
+        function showSection(index) {
+            sections.forEach((sec, i) => {
+                sec.classList.toggle("is-active", i === index);
+                steps[i]?.classList.toggle("is-active", i === index);
+            });
+        }
+
+        nextBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % sections.length;
+            showSection(currentIndex);
+        });
+
+        prevBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + sections.length) % sections.length;
+            showSection(currentIndex);
+        });
+
+        steps.forEach((step, i) => {
+            step.addEventListener("click", () => {
+                currentIndex = i;
+                showSection(currentIndex);
+            });
+        });
+
+        // Add expanding menu functionality
+        const menuToggleBtn = document.getElementById('menuToggleBtn');
+        const menuContainer = document.getElementById('menuContainer');
+        const menuCloseBtn = document.getElementById('menuCloseBtn');
+        
+        // Toggle menu expansion on hamburger click
+        menuToggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            menuContainer.classList.toggle('expanded');
+        });
+        
+        // Close menu on close button click
+        menuCloseBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            menuContainer.classList.remove('expanded');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!menuContainer.contains(e.target)) {
+                menuContainer.classList.remove('expanded');
+            }
+        });
+    </script>
+</body>
+</html>
