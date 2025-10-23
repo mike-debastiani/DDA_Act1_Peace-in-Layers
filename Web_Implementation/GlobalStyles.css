@@ -389,3 +389,11 @@
   height: 24px;
   flex-shrink: 0;
 }
+
+.header-title {
+  font-family: var(--font-family);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-4xl);
+  color: var(--color-primary);
+  margin: 0;
+}
