@@ -214,8 +214,7 @@ body {
   width: clamp(40px, 8vw, 80px);
   height: clamp(4px, 0.6vw, 6px);
   border-radius: 100px;
-  border: 2px solid var(--color-primary);
-  background: var(--color-primary-light);
+  background: var(--primary-100);
   opacity: 0.6;
   transition: all 0.2s ease;
 }

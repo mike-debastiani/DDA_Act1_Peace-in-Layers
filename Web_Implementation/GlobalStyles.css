@@ -28,15 +28,43 @@
   --leading-normal: 1.5;
   --leading-none: 1;
   
-  /* GLOBAL Colors */
-  --color-primary: #7D7DCF;
-  --color-primary-hover: #7373c2;
-  --color-primary-light: rgba(125, 125, 207, 0.1);
-  --color-primary-light-hover: rgba(125, 125, 207, 0.167);
+  /* ===================== Design System Colors ===================== */
+  
+  /* Primary Color Palette */
+  --primary-50: #FEF0E6;
+  --primary-100: #FDD9BE;
+  --primary-200: #FCC197;
+  --primary-300: #FBA96F;
+  --primary-400: #FA9247;
+  --primary-500: #F9771A;
+  --primary-600: #EA6506;
+  --primary-700: #C25405;
+  --primary-800: #9A4304;
+  --primary-900: #723103;
+  --primary-950: #4B2002;
+  
+  /* Grayscale Color Palette */
+  --grayscale-50: #F7F7F7;
+  --grayscale-100: #DFDFDF;
+  --grayscale-200: #CACACA;
+  --grayscale-300: #B5B5B5;
+  --grayscale-400: #9F9F9F;
+  --grayscale-500: #8A8A8A;
+  --grayscale-600: #747474;
+  --grayscale-700: #5F5F5F;
+  --grayscale-800: #494949;
+  --grayscale-900: #343434;
+  --grayscale-950: #1F1F1F;
+  
+  /* Semantic Color Mappings */
+  --color-primary: var(--primary-500);
+  --color-primary-hover: var(--primary-600);
+  --color-primary-light: var(--primary-50);
+  --color-primary-light-hover: var(--primary-100);
   
   /* Menu Colors */
-  --menu-bg: rgba(125, 125, 207, 0.1);
-  --menu-text: #7D7DCF;
+  --menu-bg: var(--primary-50);
+  --menu-text: var(--primary-500);
   --menu-border-radius: 35px;
 }
 
@@ -242,6 +270,11 @@
   background-color: var(--menu-bg);
 }
 
+/* When expanded, keep the right circular button slightly darker */
+.menu-container.expanded .menu-button {
+  background-color: var(--color-primary-light-hover);
+}
+
 .menu-button {
   position: absolute;
   top: 0;
@@ -317,6 +350,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 3; /* Ensure it appears above the hamburger button */
 }
 
 .menu-container.expanded .menu-close {
