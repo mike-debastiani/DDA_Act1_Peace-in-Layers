@@ -389,6 +389,35 @@ body {
   bottom: 32px;
   background-color: var(--color-primary);
   z-index: 10;
+  animation: pulse-heartbeat 4s ease-in-out infinite;
+}
+
+/* Puls-Animation wie ein Herzschlag */
+@keyframes pulse-heartbeat {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(249, 119, 26, 0.7);
+  }
+  8% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 4px rgba(249, 119, 26, 0.4);
+  }
+  15% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(249, 119, 26, 0);
+  }
+  22% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 4px rgba(249, 119, 26, 0.3);
+  }
+  30% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(249, 119, 26, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(249, 119, 26, 0);
+  }
 }
 
 .map-container {
