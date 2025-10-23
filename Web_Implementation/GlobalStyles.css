@@ -150,6 +150,17 @@
   background-color: var(--color-primary);
 }
 
+.btn-primary:disabled {
+  opacity: 60%;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary:disabled:hover {
+  opacity: 40%;
+  transform: none;
+}
+
 
 /* Secondary Button */
 .btn-secondary {

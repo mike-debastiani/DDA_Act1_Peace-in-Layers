@@ -17,14 +17,14 @@
   <body>
     <header class="intro-header">
       <!-- LEFT Menu -->
-      <a href="index.html" class="btn btn-secondary">
-        <img src="src/icons/backArrowIcon.svg" alt="Back Icon" class="btn-icon" style="width: 13px; height: 24px" />
-        Back to Communities
-      </a>
+      <button id="closeIntroBtn" class="btn btn-secondary">
+        <img src="src/icons/closeIcon.svg" alt="Close Icon" class="btn-icon" style="width: 18px; height: 18px" />
+        Close Intro
+      </button>
 
       <!-- RIGHT Menu group -->
       <div class="header-right">
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" disabled>
           <img src="src/icons/introIcon.svg" alt="Intro Icon" class="btn-icon" style="width: 41px; height: 9px" />
           Intro
         </button>
@@ -176,6 +176,19 @@
       document.addEventListener('click', function(e) {
         if (!menuContainer.contains(e.target)) {
           menuContainer.classList.remove('expanded');
+        }
+      });
+
+      // Close Intro functionality - return to previous page
+      const closeIntroBtn = document.getElementById('closeIntroBtn');
+      closeIntroBtn.addEventListener('click', function() {
+        // Check if there's a referrer (previous page)
+        if (document.referrer && document.referrer !== window.location.href) {
+          // Go back to the previous page
+          history.back();
+        } else {
+          // Fallback to index.html if no referrer
+          window.location.href = 'index.html';
         }
       });
     </script>
