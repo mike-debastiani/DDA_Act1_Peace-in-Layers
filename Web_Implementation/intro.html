@@ -158,6 +158,30 @@
           showSection(currentIndex);
         });
       });
+
+      // Add expanding menu functionality
+      const menuToggleBtn = document.getElementById('menuToggleBtn');
+      const menuContainer = document.getElementById('menuContainer');
+      const menuCloseBtn = document.getElementById('menuCloseBtn');
+      
+      // Toggle menu expansion on hamburger click
+      menuToggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        menuContainer.classList.toggle('expanded');
+      });
+      
+      // Close menu on close button click
+      menuCloseBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        menuContainer.classList.remove('expanded');
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!menuContainer.contains(e.target)) {
+          menuContainer.classList.remove('expanded');
+        }
+      });
     </script>
   </body>
 </html>

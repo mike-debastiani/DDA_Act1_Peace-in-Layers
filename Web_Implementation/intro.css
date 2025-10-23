@@ -16,7 +16,7 @@ body {
   width: 90vw;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 24px 0;
+  padding: 16px 0;
   position: relative;
   z-index: 10;
   flex-shrink: 0; /* verhindert, dass Header schrumpft */
@@ -26,7 +26,7 @@ body {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
 }
 
 /* Mehrere Sections im Wrapper übereinandergelegt */
@@ -49,6 +49,11 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.6s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 16px;
 }
 
 /* Nur aktive Section sichtbar */
@@ -56,49 +61,143 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
-/* Container centers everything */
-.intro-section {
-  display: flex;
-  justify-content: center; /* center horizontally */
-  align-items: center; /* center vertically */
-  /* height: 80vh; full viewport height (adjust as needed) */
-}
 
 /* Bildbereich passt sich dynamisch an */
 .intro-image {
   position: relative;
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  max-height: 80vh;
   border-radius: 16px;
   overflow: hidden;
-  max-width: 1400px; /* optional limit */
-  margin: 2rem;
 }
 
 /* Image itself */
 .intro-image img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center center;
   display: block;
 }
 
-/* Text overlay */
+/* Text overlay - responsive */
 .intro-text {
   position: absolute;
-  top: 5%;
-  left: 5%; /* or left: 5%; if you prefer */
-  max-width: 30%;
+  top: clamp(20px, 5%, 40px);
+  left: clamp(20px, 5%, 40px);
+  max-width: clamp(300px, 35%, 500px);
   text-align: left;
+}
+
+/* Responsive Text Sizes */
+.intro-text h1 {
+  margin: 0 0 clamp(8px, 2vw, 16px) 0;
+  font-size: clamp(var(--text-2xl), 4vw, var(--text-5xl));
+  line-height: 1.2;
+}
+
+.intro-text p {
+  margin: 0;
+  font-size: clamp(var(--text-sm), 2vw, var(--text-base));
+  line-height: 1.5;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+
+  .intro-section {
+    padding: 16px;
+  }
+  
+  .intro-image {
+    max-height: 70vh;
+    border-radius: 12px;
+  }
+  
+  .intro-text {
+    top: clamp(16px, 3%, 24px);
+    left: clamp(16px, 3%, 24px);
+    max-width: calc(100% - 32px);
+    padding: clamp(12px, 2vw, 16px);
+  }
+  
+  .intro-text h1 {
+    font-size: clamp(var(--text-xl), 5vw, var(--text-3xl));
+  }
+  
+  .intro-text p {
+    font-size: clamp(var(--text-xs), 2.5vw, var(--text-sm));
+  }
+}
+
+@media (max-width: 480px) {
+  
+  .intro-image {
+    max-height: 60vh;
+    border-radius: 8px;
+  }
+  
+  .intro-text {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    max-width: none;
+    padding: 12px;
+  }
 }
 
 /* Navigation fix unten */
 .intro-nav {
   flex-shrink: 0; /* nicht schrumpfen */
-  width: clamp(1200px, 95vw, 1400px);
+  width: clamp(320px, 95vw, 1400px);
   margin: 0 auto;
-  padding: 16px 0 24px; /* etwas Innenabstand */
+  padding: 16px 0; /* etwas Innenabstand */
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+  .intro-nav {
+    padding: 12px 0;
+    gap: 12px;
+  }
+  
+  .nav-prev,
+  .nav-next {
+    font-size: var(--text-sm);
+    gap: 8px;
+  }
+  
+  .nav-prev .btn-icon,
+  .nav-next .btn-icon {
+    width: 10px !important;
+    height: 18px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-nav {
+    padding: 8px 0;
+    gap: 8px;
+  }
+  
+  .nav-prev,
+  .nav-next {
+    font-size: var(--text-xs);
+    gap: 6px;
+    padding: 8px 12px;
+  }
+  
+  .nav-prev .btn-icon,
+  .nav-next .btn-icon {
+    width: 8px !important;
+    height: 16px !important;
+  }
 }
 
 /* Steps / Dots */
@@ -112,9 +211,9 @@ body {
 }
 
 .step {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
+  width: clamp(40px, 8vw, 80px);
+  height: clamp(4px, 0.6vw, 6px);
+  border-radius: 100px;
   border: 2px solid var(--color-primary);
   background: var(--color-primary-light);
   opacity: 0.6;
@@ -134,7 +233,7 @@ body {
 .nav-next {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   font-size: var(--text-base);
   font-weight: var(--weight-medium);
   color: var(--color-primary);

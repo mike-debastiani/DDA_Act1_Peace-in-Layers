@@ -285,7 +285,7 @@
 .menu-item {
   font-family: var(--font-family);
   font-weight: var(--weight-medium);
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: var(--menu-text);
   text-decoration: none;
   cursor: pointer;
