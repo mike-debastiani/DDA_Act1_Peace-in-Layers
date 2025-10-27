@@ -26,8 +26,34 @@
  * ======================================================= */
 
 /* ---------- CSV paths ---------- */
-const CSV_MAIN = "BijeliBrijegP_reduced_mapped_edit.csv";
-const CSV_STRUCT = "Layer_Strucutre_new.csv";
+// Community to CSV file mapping
+const COMMUNITY_CSV_MAP = {
+  'potoci': '../data/PotociP_reduced_mapped.csv',
+  'zalik': '../data/ZallikP_reduced_mapped.csv', 
+  'cim': '../data/CimP_reduced_mapped.csv',
+  'cernica': '../data/CernicaP_reduced_mapped.csv',
+  'bijeli-brijeg': '../data/BijeliBrijegP_reduced_mapped.csv',
+  'podhum': '../data/PodhumP_reduced_mapped.csv',
+  'blagaj': '../data/BlagajP_reduced_mapped.csv'
+};
+
+// Get community from URL parameter
+function getCommunityFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const community = urlParams.get('community');
+  return community ? community.toLowerCase() : 'bijeli-brijeg'; // default fallback
+}
+
+// Get CSV paths based on community
+function getCSVPaths() {
+  const community = getCommunityFromURL();
+  const csvMain = COMMUNITY_CSV_MAP[community] || COMMUNITY_CSV_MAP['bijeli-brijeg'];
+  const csvStruct = "../data/Layer_Strucutre_new.csv";
+  return { csvMain, csvStruct };
+}
+
+// Dynamic CSV paths
+let CSV_MAIN, CSV_STRUCT;
 
 /* ---------- Colors / style ---------- */
 const CLR_BG = [255, 255, 255];
@@ -414,7 +440,7 @@ function buildHierarchyMap(structRows) {
   for (const r of structRows) {
     const dim = normKey(r["Dimension"]);
     const cat = normKey(r["Category"]);
-    const sub = normKey(r["Subcategory"]);
+    const sub = normKey(r["Code"]); // Use "Code" column which contains the actual subcategory names
     if (!dim || !cat || !sub) continue;
     if (!map.has(dim)) map.set(dim, new Map());
     const cm = map.get(dim);
@@ -2203,6 +2229,18 @@ function preload() {
 }
 
 function setup() {
+  // Initialize CSV paths based on URL parameter
+  const paths = getCSVPaths();
+  CSV_MAIN = paths.csvMain;
+  CSV_STRUCT = paths.csvStruct;
+  
+  // Update page title with community name
+  const community = getCommunityFromURL();
+  const communityDisplayName = community.split('-').map(word => 
+    word.charAt(0).toUpperCase() + word.slice(1)
+  ).join(' ');
+  document.getElementById('pageTitle').textContent = communityDisplayName;
+
   const wrap = document.getElementById("p5-wrap");
   const rect = wrap.getBoundingClientRect();
   W = Math.max(640, Math.floor(rect.width));
