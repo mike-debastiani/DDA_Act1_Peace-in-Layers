@@ -68,7 +68,7 @@ function getCSSRGB(prop) {
 }
 
 // Initialize color constants from CSS variables
-const CLR_BG = getCSSRGB('--clr-bg') || [255, 255, 255];
+const CLR_BG = getCSSRGB('--clr-bg') || [247, 247, 247]; // Same as panel background
 const CLR_DOTS = getCSSRGB('--clr-dots') || [180, 180, 180];
 const CLR_PLATES = getCSSRGB('--clr-plates') || [210, 210, 210];
 const CLR_TILE = getCSSRGB('--clr-tile') || [190, 190, 190];
@@ -104,6 +104,14 @@ const VIEW_SIZE_BASE = 850;
 const VIEW_SIZE_ZOOM = 420;
 let scrollY = 0;
 const SCROLL_PER_WHEEL = 0.5;
+
+// Segmented zoom controls
+let currentZoomLevel = 1;
+const ZOOM_LEVELS = {
+  1: { viewSize: VIEW_SIZE_BASE },
+  2: { viewSize: VIEW_SIZE_BASE / 2 },
+  3: { viewSize: VIEW_SIZE_BASE / 3 }
+};
 
 /* ---------- Geometry sizes ---------- */
 const DOT_RADIUS_VOTES = 1.7;
@@ -448,7 +456,28 @@ function clearSelectionAndHeader() {
   const btn = document.getElementById("votesHeaderBtn");
   if (btn) btn.classList.remove("active");
 
+  updateClearButtonVisibility();
   updatePanel();
+}
+
+function updateClearButtonVisibility() {
+  const clearBtn = document.getElementById("clearBtn");
+  if (!clearBtn) return;
+
+  // Check if there are any active selections
+  const hasSelection = 
+    selected.indicators.size > 0 ||
+    selected.subcats.size > 0 ||
+    selected.cats.size > 0 ||
+    selected.dims.size > 0 ||
+    selected.type !== null;
+
+  // Show/hide button based on selection with class toggle for smooth transition
+  if (hasSelection) {
+    clearBtn.classList.add("visible");
+  } else {
+    clearBtn.classList.remove("visible");
+  }
 }
 
 /* ---------- Hierarchy helpers ---------- */
@@ -1209,7 +1238,8 @@ function pickAt(px, py) {
     pickGL._renderer.GL.disable(pickGL._renderer.GL.DEPTH_TEST);
   }
 
-  const viewSizeNow = zoomed ? VIEW_SIZE_ZOOM : VIEW_SIZE_BASE;
+  // Use same zoom level as draw function for accurate picking
+  const viewSizeNow = ZOOM_LEVELS[currentZoomLevel]?.viewSize || VIEW_SIZE_BASE;
   pickGL.ortho(
     -viewSizeNow / 2,
     viewSizeNow / 2,
@@ -2120,7 +2150,7 @@ function updatePanel() {
   }));
 
   const sortPill = (a, b) =>
-    b.active - a.active || a.pretty.localeCompare(b.pretty);
+    b.active - a.active || b.count - a.count || a.pretty.localeCompare(b.pretty);
 
   subsAll.sort(sortPill);
   catsAll.sort(sortPill);
@@ -2249,6 +2279,9 @@ function updatePanel() {
     if (isVotesMode) wrap.classList.add("hlHeader");
     else wrap.classList.remove("hlHeader");
   }
+
+  // Update clear button visibility
+  updateClearButtonVisibility();
 }
 
 /* =========================
@@ -2572,6 +2605,22 @@ function setup() {
     };
   }
 
+  // Segmented Zoom Controls (1.0x, 1.5x, 2.0x)
+  const zoomStepButtons = document.querySelectorAll(".zoom-step");
+  zoomStepButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const zoomValue = parseFloat(btn.dataset.zoom);
+      currentZoomLevel = zoomValue;
+      
+      // Update active state
+      zoomStepButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      // Reset scroll when zoom changes
+      scrollY = 0;
+    });
+  });
+
   cnv.elt.addEventListener(
     "wheel",
     (e) => {
@@ -2679,7 +2728,8 @@ function keyPressed() {
 function draw() {
   background(CLR_BG[0], CLR_BG[1], CLR_BG[2]);
 
-  const viewSizeNow = zoomed ? VIEW_SIZE_ZOOM : VIEW_SIZE_BASE;
+  // Use zoom level from segmented controls
+  const viewSizeNow = ZOOM_LEVELS[currentZoomLevel]?.viewSize || VIEW_SIZE_BASE;
 
   ortho(
     -viewSizeNow / 2,

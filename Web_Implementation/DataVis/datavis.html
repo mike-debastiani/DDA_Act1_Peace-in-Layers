@@ -9,7 +9,44 @@
   </head>
 
   <body>
-    <div class="wrap">
+    <!-- HEADER -->
+    <header class="datavis-header">
+      <!-- LEFT Menu -->
+      <button id="backToCommunitiesBtn" class="btn btn-secondary">
+        <img src="../src/icons/backArrowIcon.svg" alt="Back Icon" class="btn-icon" style="width: 20px; height: 32px" />
+        Back to Communities
+      </button>
+
+      <!-- RIGHT Menu group -->
+      <div class="header-right">
+        <a href="../intro.html" class="btn btn-primary">
+          <img src="../src/icons/introIcon.svg" alt="Intro Icon" class="btn-icon" style="width: 41px; height: 9px" />
+          Intro
+        </a>
+
+        <div class="menu-toggle">
+          <div class="menu-container" id="menuContainer">
+            <button class="menu-button" id="menuToggleBtn">
+              <img src="../src/icons/hamburgerMenuIcon.svg" alt="Menu" class="menu-icon" style="width: 28px; height: 18px" />
+            </button>
+
+            <div class="menu-content">
+              <a href="#" class="menu-item">Home</a>
+              <a href="#" class="menu-item">Credits</a>
+              <div class="menu-item-with-arrow">
+                <a href="#" class="menu-item">Language</a>
+                <img src="../src/icons/dropdownArrowIcon.svg" alt="Dropdown" style="width: 16px; height: 9px" />
+              </div>
+            </div>
+
+            <img src="../src/icons/closeIcon.svg" alt="Close" class="menu-close" id="menuCloseBtn" />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <div class="content-container">
       <!-- SIDEBAR -->
       <aside class="panel" id="panel">
         <div class="panelScroll">
@@ -138,13 +175,6 @@
             </div>
           </section>
         </div>
-
-        <!-- STICKY FOOTER -->
-        <div class="clearBar">
-          <div class="clearInner">
-            <button id="clearBtn" class="clearBtn">Clear Selection</button>
-          </div>
-        </div>
       </aside>
 
       <!-- CANVAS AREA -->
@@ -156,6 +186,24 @@
 
         <button id="zoomBtn" class="zoomBtn">Zoom</button>
       </div>
+      </div>
+
+      <!-- BOTTOM BUTTONS -->
+      <div class="bottom-controls">
+        <div class="bottom-controls-left">
+          <button id="clearBtn" class="clearBtn">
+            <img src="../src/icons/closeIconWhite.svg" alt="Clear Selection" class="btn-icon" style="width: 18px; height: 18px" />
+            Clear Selection
+          </button>
+        </div>
+        <div class="bottom-controls-right">
+          <div class="zoom-controls">
+            <button class="zoom-step active" data-zoom="1">1x</button>
+            <button class="zoom-step" data-zoom="2">2x</button>
+            <button class="zoom-step" data-zoom="3">3x</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- LIBRARIES -->
@@ -164,5 +212,39 @@
 
     <!-- MAIN SKETCH -->
     <script src="sketch.js"></script>
+    
+    <!-- HEADER FUNCTIONALITY -->
+    <script>
+      // Add expanding menu functionality
+      const menuToggleBtn = document.getElementById('menuToggleBtn');
+      const menuContainer = document.getElementById('menuContainer');
+      const menuCloseBtn = document.getElementById('menuCloseBtn');
+      
+      // Toggle menu expansion on hamburger click
+      menuToggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        menuContainer.classList.toggle('expanded');
+      });
+      
+      // Close menu on close button click
+      menuCloseBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        menuContainer.classList.remove('expanded');
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!menuContainer.contains(e.target)) {
+          menuContainer.classList.remove('expanded');
+        }
+      });
+
+      // Back to Communities functionality
+      const backToCommunitiesBtn = document.getElementById('backToCommunitiesBtn');
+      backToCommunitiesBtn.addEventListener('click', function() {
+        // Navigate back to index.html
+        window.location.href = '../index.html';
+      });
+    </script>
   </body>
 </html>
