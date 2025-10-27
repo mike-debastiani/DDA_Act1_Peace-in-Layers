@@ -213,7 +213,7 @@ body {
   background-color: transparent;
   color: var(--color-primary);
   padding: 0;
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   font-weight: var(--weight-medium);
   min-height: 24px;
   gap: 12px;
@@ -267,9 +267,6 @@ body {
   overflow-x: hidden !important;
   color: #111;
 }
-.indItem:hover {
-  background: #f6f6f6;
-}
 
 .indItem::before {
   content: "";
@@ -282,33 +279,76 @@ body {
   background: #e5e7eb;
 }
 
-.indLabel {
-  font-weight: var(--weight-semibold);
-  line-height: 1.35;
-  color: #111;
-  word-break: break-word;
-}
-
-.indVotes {
-  margin-left: auto;
-  min-width: 26px;
-  text-align: right;
-  font-weight: var(--weight-bold);
-  opacity: 0.9;
-  font-variant-numeric: tabular-nums;
-  color: #111;
-}
-
 /* state classes for clicked/related indicators */
 .ind--selected::before,
 .ind--affected::before {
   background: var(--color-primary);
 }
 
-.ind--dimmed .indLabel,
+.indItem * {
+  pointer-events: none;
+}
+
+.indLabel {
+  line-height: 1.35;
+  color: var(--grayscale-950);
+  word-break: break-word;
+  /* Default: regular-base text */
+  font-family: var(--font-family);
+  font-weight: var(--weight-normal);
+  font-size: var(--text-base);
+}
+
+/* affected: Medium-base text, grayscale 950 */
+.ind--affected .indLabel {
+  font-weight: var(--weight-medium);
+  color: var(--grayscale-950);
+}
+
+/* dimmed: regular-base text, grayscale 800 */
+.ind--dimmed .indLabel {
+  font-weight: var(--weight-normal);
+  color: var(--grayscale-800);
+}
+
+/* hover: medium-base text, grayscale 950, background primary 100 */
+.indItem:hover .indLabel {
+  font-weight: var(--weight-medium);
+  color: var(--grayscale-950);
+}
+
+.indItem:hover {
+  background: var(--primary-100);
+}
+
+.indVotes {
+  margin-left: auto;
+  min-width: 26px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  /* Always regular-sm text */
+  font-family: var(--font-family);
+  font-weight: var(--weight-normal);
+  font-size: var(--text-sm);
+  line-height: var(--leading-tight);
+  /* Default color: grayscale 950 */
+  color: var(--grayscale-950);
+}
+
+/* affected: grayscale 950 */
+.ind--affected .indVotes {
+  color: var(--grayscale-950);
+}
+
+/* dimmed: grayscale 800 */
 .ind--dimmed .indVotes {
-  color: #888;
-  opacity: 0.55;
+  color: var(--grayscale-800);
+  opacity: 1;
+}
+
+/* hover: grayscale 950 */
+.indItem:hover .indVotes {
+  color: var(--grayscale-950);
 }
 
 .indItem * {
@@ -318,8 +358,8 @@ body {
 /* ===== PILLS ===== */
 .pill {
   display: inline-block;
-  padding: 4px 10px;
-  margin: 3px 6px 0 0;
+  padding: 4px 12px;
+  margin: 6px 6px 0 0;
   border-radius: 999px;
   background: var(--pill-bg);
   border: 1px solid var(--pill-border);
@@ -330,7 +370,22 @@ body {
   transition: background-color 120ms ease, border-color 120ms ease,
     color 120ms ease;
   max-width: 100%;
+  /* text-medium-sm styling */
+  font-family: var(--font-family);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-sm);
+  line-height: var(--leading-tight);
 }
+
+/* Remove whitespace between inline-block pills */
+#subPills, #catPills, #dimPills {
+  font-size: 0;
+}
+
+#subPills .pill, #catPills .pill, #dimPills .pill {
+  font-size: var(--text-sm);
+}
+
 .pill:hover {
   background: var(--pill-hover);
 }
@@ -346,8 +401,10 @@ body {
 .pill .pillCount {
   margin-left: 6px;
   opacity: 0.75;
+  /* text-xs styling */
   font-size: var(--text-xs);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-tight);
   font-variant-numeric: tabular-nums;
 }
 

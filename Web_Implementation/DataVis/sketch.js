@@ -1680,41 +1680,57 @@ function computeSelectionFromHit(hit) {
 /* Layer 0: Votes (dots) */
 function drawVotesLayer(layerIndex, votes, halfStack, radius) {
   if (!votes || votes.length === 0) return;
-
+ 
   const y = layerIndex * verticalGap - halfStack;
   const lift = thickness / 2 + LIFT_DOTS;
-
+ 
+  // are we in "all votes" highlight mode?
   const globalAllVotesMode = lastClicked && lastClicked.type === "voteAll";
   const hoverAllVotesFromHeader = hoverVotesHeader === true;
-
-  // If hovering a vote dot in canvas, only that indicator’s votes should glow
+ 
+  // which indicator are we hovering (from canvas hover)?
   let hoveredIndicatorForVotes = -1;
   if (hoverHit && hoverHit.type === "voteStable") {
     hoveredIndicatorForVotes =
       hoverHit.indicatorIndex != null ? hoverHit.indicatorIndex : -1;
   }
-
+ 
+  // which indicators are part of the ACTIVE selection?
+  // (clicking an indicator, or clicking a subcat/cat/dim that pulls indicators)
+  const selectedIndicators =
+    selected && selected.indicators ? selected.indicators : new Set();
+ 
   noStroke();
+ 
   for (let i = 0; i < votes.length; i++) {
     const v = votes[i];
-
+ 
     let makeOrange = false;
-
+ 
+    // 1. full "all votes" mode (click on Votes header OR hover header)
     if (globalAllVotesMode || hoverAllVotesFromHeader) {
-      makeOrange = true; // ALL votes orange
+      makeOrange = true;
+ 
+    // 2. if we have a real current selection:
+    //    any vote whose indicator is in that selection should glow
+    } else if (selectedIndicators.size > 0) {
+      if (v.indicatorIndex != null && selectedIndicators.has(v.indicatorIndex)) {
+        makeOrange = true;
+      }
+ 
+    // 3. fallback: hover over a specific vote/indicator
     } else if (hoveredIndicatorForVotes >= 0) {
-      // Only votes belonging to the hovered indicator are orange
       if (v.indicatorIndex === hoveredIndicatorForVotes) {
         makeOrange = true;
       }
     }
-
+ 
     if (makeOrange) {
       fill(CLR_ACTIVE[0], CLR_ACTIVE[1], CLR_ACTIVE[2], 210);
     } else {
       fill(CLR_DOTS[0], CLR_DOTS[1], CLR_DOTS[2], 220);
     }
-
+ 
     push();
     translate(v.x, y + lift, v.z);
     cylinder(radius, 1, 16, 1, true, true);
