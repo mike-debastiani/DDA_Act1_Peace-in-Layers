@@ -56,11 +56,28 @@ function getCSVPaths() {
 let CSV_MAIN, CSV_STRUCT;
 
 /* ---------- Colors / style ---------- */
-const CLR_BG = [255, 255, 255];
-const CLR_DOTS = [180, 180, 180];
-const CLR_PLATES = [210, 210, 210];
-const CLR_TILE = [190, 190, 190];
-const CLR_ACTIVE = [237, 60, 26]; // #ED3C1A
+// Helper function to get CSS variable value
+function getCSSVariable(prop) {
+  return getComputedStyle(document.documentElement).getPropertyValue(prop).trim();
+}
+
+// Get RGB values from CSS variables
+function getCSSRGB(prop) {
+  const value = getCSSVariable(prop);
+  return value.split(',').map(v => parseFloat(v.trim()));
+}
+
+// Initialize color constants from CSS variables
+const CLR_BG = getCSSRGB('--clr-bg') || [255, 255, 255];
+const CLR_DOTS = getCSSRGB('--clr-dots') || [180, 180, 180];
+const CLR_PLATES = getCSSRGB('--clr-plates') || [210, 210, 210];
+const CLR_TILE = getCSSRGB('--clr-tile') || [190, 190, 190];
+
+// Get primary color RGB values
+const CLR_ACTIVE_R = parseInt(getCSSVariable('--clr-active-r')) || 249;
+const CLR_ACTIVE_G = parseInt(getCSSVariable('--clr-active-g')) || 119;
+const CLR_ACTIVE_B = parseInt(getCSSVariable('--clr-active-b')) || 26;
+const CLR_ACTIVE = [CLR_ACTIVE_R, CLR_ACTIVE_G, CLR_ACTIVE_B]; // #F9771A
 
 /* ---------- Layers ---------- */
 const LAYERS = [

@@ -370,6 +370,14 @@ body {
   min-height: 0;
 }
 
+.impression-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* sorgt für gleichmäßiges Zuschneiden */
+  border-radius: 12px; /* passt sich der Box an */
+  display: block;
+}
+
 .placeholder-image {
   background: linear-gradient(45deg, var(--grayscale-200) 25%, transparent 25%), 
               linear-gradient(-45deg, var(--grayscale-200) 25%, transparent 25%), 
