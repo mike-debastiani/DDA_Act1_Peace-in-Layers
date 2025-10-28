@@ -587,7 +587,7 @@ body {
   bottom: -12px;
 
   background: transparent; /* no fill */
-  border: 2px solid var(--color-primary); /* thick orange outline */
+  border: none; /* border removed */
   border-radius: 6px; /* tiny rounding so it feels intentional */
 
   pointer-events: none;
@@ -678,8 +678,7 @@ body {
   background: rgba(249, 119, 26, 0.1);
   color: var(--color-primary) !important;
 
-  /* fake orange border box like the pills */
-  box-shadow: 0 0 0 2px var(--color-primary) inset;
+  /* border removed */
   border-radius: 6px;
 }
 
@@ -697,7 +696,7 @@ body {
 /* pill hoverSync stays the same look */
 .pill.hoverSync {
   background: rgba(249, 119, 26, 0.1);
-  border-color: var(--color-primary) !important;
+  border-color: transparent !important; /* border removed */
   color: var(--color-primary) !important;
 }
 .pill.hoverSync .pillCount {
@@ -721,7 +720,7 @@ body {
   bottom: -4px;
 
   background: transparent;
-  border: 2px solid var(--color-primary);
+  border: none; /* border removed */
   border-radius: 6px;
 
   pointer-events: none;
@@ -739,7 +738,7 @@ body {
 
   /* light orange fill like pills/rows on hover */
   background: rgba(249, 119, 26, 0.1);
-  border: 2px solid var(--color-primary);
+  border: none; /* border removed */
   border-radius: 6px;
 
   pointer-events: none;

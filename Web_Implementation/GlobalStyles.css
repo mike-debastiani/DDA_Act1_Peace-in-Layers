@@ -414,6 +414,13 @@
   line-height: var(--leading-tight);
   color: var(--primary-500);
   margin: 0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.header-title:hover {
+  color: var(--primary-600);
 }
 
 /* ===================== New Header Styles ===================== */

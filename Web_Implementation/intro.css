@@ -389,43 +389,30 @@ body {
 
 .community-data-btn {
   align-self: flex-start;
-  font-size: var(--text-base);
-  padding: 12px 24px;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  padding: 12px 8px;
   margin-top: auto;
   margin-left: 0;
   position: absolute;
   bottom: 32px;
-  background-color: var(--color-primary);
+  background-color: transparent;
+  color: var(--primary-500);
+  border: none;
+  border-radius: 12px;
   z-index: 10;
-  animation: pulse-heartbeat 4s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.2s ease;
 }
 
-/* Puls-Animation wie ein Herzschlag */
-@keyframes pulse-heartbeat {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(249, 119, 26, 0.7);
-  }
-  8% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 4px rgba(249, 119, 26, 0.4);
-  }
-  15% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(249, 119, 26, 0);
-  }
-  22% {
-    transform: scale(1.02);
-    box-shadow: 0 0 0 4px rgba(249, 119, 26, 0.3);
-  }
-  30% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(249, 119, 26, 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(249, 119, 26, 0);
-  }
+.community-data-btn:hover {
+  transform: translateY(-1px);
+}
+
+.community-data-btn:active {
+  transform: translateY(0);
 }
 
 .map-container {

@@ -16,14 +16,14 @@
   </head>
   <body>
     <header class="header-container">
-      <h1 class="header-title">Layers of Peace</h1>
+      <a href="index.html" class="header-title">Layers of Peace</a>
       
       <div class="header-buttons">
         <a href="intro.html" class="header-btn header-btn-active">
           <img src="src/icons/introIconWhite.svg" alt="Intro" class="header-btn-icon-intro" />
           Intro
         </a>
-        <a href="index.html" class="header-btn header-btn-inactive">
+        <a href="communities.html" class="header-btn header-btn-inactive">
           <img src="src/icons/communityIcon.svg" alt="Communities" class="header-btn-icon-community" />
           Communities
         </a>
@@ -207,8 +207,8 @@
               // Go back to the previous page
               history.back();
             } else {
-              // Fallback to index.html if no referrer
-              window.location.href = 'index.html';
+          // Fallback to communities.html if no referrer
+          window.location.href = 'communities.html';
             }
           });
         }
