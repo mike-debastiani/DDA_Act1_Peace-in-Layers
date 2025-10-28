@@ -106,7 +106,7 @@ body {
 
 /* ===== CANVAS AREA (4/7 width) ===== */
 .canvasWrap {
-  flex: 0 0 calc(4/7 * 100% - 80px); /* 4/7 of container width minus half the gap */
+  flex: 0 0 calc(4/7 * 100% - 8px); /* 4/7 of container width minus half the gap */
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -134,14 +134,14 @@ body {
 }
 
 .bottom-controls-left {
-  flex: 0 0 calc(3/7 * 100% + 40px); /* Same width as Detail Panel */
+  flex: 0 0 calc(3/7 * 100% - 8px); /* Same width as Detail Panel */
   display: flex;
   justify-content: space-between; /* Space between help button and clear button */
   align-items: center;
 }
 
 .bottom-controls-right {
-  flex: 0 0 calc(4/7 * 100% - 56px); /* Same width as Canvas */
+  flex: 0 0 calc(4/7 * 100% - 8px); /* Same width as Canvas */
   display: flex;
   justify-content: flex-end; /* Align content to right edge */
   align-items: center;
@@ -321,6 +321,8 @@ body {
 .section {
   margin-bottom: 0;
   overflow-x: hidden !important;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .sectionHead {
@@ -404,6 +406,8 @@ body {
   padding: 0;
   list-style: none;
   overflow-x: hidden !important;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .indItem {
@@ -544,6 +548,8 @@ body {
 /* Remove whitespace between inline-block pills */
 #subPills, #catPills, #dimPills {
   font-size: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #subPills .pill, #catPills .pill, #dimPills .pill {
@@ -552,6 +558,7 @@ body {
 
 .pill:hover {
   background: var(--pill-hover);
+  border: 1px solid var(--primary-500) !important;
 }
 .pill.active {
   background: var(--color-primary);
@@ -696,7 +703,7 @@ body {
 /* pill hoverSync stays the same look */
 .pill.hoverSync {
   background: rgba(249, 119, 26, 0.1);
-  border-color: transparent !important; /* border removed */
+  border: 1px solid var(--primary-500) !important;
   color: var(--color-primary) !important;
 }
 .pill.hoverSync .pillCount {
@@ -758,6 +765,48 @@ body {
 /* Remove old zoom button styles since it's now in bottom controls */
 .zoomBtn {
   display: none;
+}
+
+/* ===== TOOLTIP ===== */
+.tooltip {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  color: var(--grayscale-900);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: var(--font-family);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  max-width: 300px;
+  word-wrap: break-word;
+}
+
+.tooltip.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.tooltip-layer {
+  font-weight: var(--weight-semibold);
+  color: var(--primary-500);
+}
+
+.tooltip-content {
+  color: var(--grayscale-900);
+  font-weight: var(--weight-normal);
 }
 
 /* ===== HELP OVERLAY ===== */

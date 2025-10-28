@@ -131,6 +131,12 @@ let subToIndicators = new Map(); // Map<dim||cat||sub -> Set<indicatorKey>>
 let catToIndicators = new Map(); // Map<dim||cat     -> Set<indicatorKey>>
 let dimToIndicators = new Map(); // Map<dim          -> Set<indicatorKey>>
 let mainRows = [];
+
+/* ---------- Tooltip system ---------- */
+let tooltipTimeout = null;
+let tooltipElement = null;
+let tooltipLayerElement = null;
+let tooltipContentElement = null;
 let dataReady = false;
 
 /* Pretty names */
@@ -1805,8 +1811,7 @@ function drawTreemapLayer(layerIndex, grid, halfStack) {
   const y = layerIndex * verticalGap - halfStack;
   const lift = thickness / 2 + LIFT_TILES;
 
-  stroke(237, 60, 26, 140);
-  strokeWeight(0.3);
+  noStroke();
 
   const hoveredType =
     hoverHit &&
@@ -1867,11 +1872,16 @@ function drawTreemapLayer(layerIndex, grid, halfStack) {
     const inSel = tileInSelectionGlobal(t);
 
     if (hovered) {
-      fill(CLR_ACTIVE[0], CLR_ACTIVE[1], CLR_ACTIVE[2], 255);
+      // Match panel hover styling: exact same background as pill hover
+      fill(239, 228, 220);
+      stroke(CLR_ACTIVE[0], CLR_ACTIVE[1], CLR_ACTIVE[2], 255);
+      strokeWeight(0.5); // Thinner stroke to match pill border
     } else if (inSel) {
       fill(CLR_ACTIVE[0], CLR_ACTIVE[1], CLR_ACTIVE[2], 210);
+      noStroke();
     } else {
       fill(CLR_TILE[0], CLR_TILE[1], CLR_TILE[2], 140);
+      noStroke();
     }
 
     push();
@@ -1938,7 +1948,7 @@ function drawConnectionsForSelection(halfStack) {
 
     // Votes → Indicator
     strokeVotes();
-    strokeWeight(1.4);
+    strokeWeight(0.8);
     let drawn = 0;
     for (const v of voteNodes) {
       if (v.indicatorIndex !== i) continue;
@@ -1948,7 +1958,7 @@ function drawConnectionsForSelection(halfStack) {
 
     // Indicator → Sub
     strokeIndSub();
-    strokeWeight(2.0);
+    strokeWeight(1.0);
     for (const t of triples) {
       const tileSub = subcatTiles.items.find(
         (it) => it.sub === t.sub && it.cat === t.cat && it.dim === t.dim
@@ -1960,7 +1970,7 @@ function drawConnectionsForSelection(halfStack) {
 
     // Sub → Cat
     strokeSubCat();
-    strokeWeight(1.7);
+    strokeWeight(0.9);
     for (const t of triples) {
       const tileSub = subcatTiles.items.find(
         (it) => it.sub === t.sub && it.cat === t.cat && it.dim === t.dim
@@ -1975,7 +1985,7 @@ function drawConnectionsForSelection(halfStack) {
 
     // Cat → Dim
     strokeCatDim();
-    strokeWeight(1.5);
+    strokeWeight(0.8);
     for (const t of triples) {
       const tileCat = catTiles.items.find(
         (it) => it.cat === t.cat && it.dim === t.dim
@@ -2295,6 +2305,11 @@ function preload() {
 }
 
 function setup() {
+  // Initialize tooltip elements
+  tooltipElement = document.getElementById('tooltip');
+  tooltipLayerElement = document.getElementById('tooltipLayer');
+  tooltipContentElement = document.getElementById('tooltipContent');
+  
   // Initialize CSV paths based on URL parameter
   const paths = getCSVPaths();
   CSV_MAIN = paths.csvMain;
@@ -2625,7 +2640,13 @@ function setup() {
   cnv.elt.addEventListener(
     "wheel",
     (e) => {
-      if (zoomed) e.preventDefault();
+      // Only prevent default scrolling when zoomed and scrolling over the canvas
+      if (currentZoomLevel > 1) {
+        e.preventDefault();
+        // Handle canvas scrolling
+        const halfStack = ((LAYERS.length - 1) * verticalGap) / 2;
+        scrollY = clamp(scrollY + e.deltaY * SCROLL_PER_WHEEL, -halfStack, halfStack);
+      }
     },
     { passive: false }
   );
@@ -2702,13 +2723,7 @@ function resizeForWrap() {
 }
 
 /* ---------- Wheel scroll while zoomed ---------- */
-function mouseWheel(e) {
-  // Allow scrolling when zoomed in (level 2 or 3)
-  if (currentZoomLevel === 1) return;
-  const halfStack = ((LAYERS.length - 1) * verticalGap) / 2;
-  scrollY = clamp(scrollY + e.deltaY * SCROLL_PER_WHEEL, -halfStack, halfStack);
-  return false;
-}
+// This function is no longer needed as scrolling is handled directly in the event listener
 
 /* ---------- Keyboard shortcuts ---------- */
 function keyPressed() {
@@ -2794,6 +2809,61 @@ function draw() {
   pop();
 }
 
+/* ---------- Tooltip functions ---------- */
+function showTooltip(layerType, content, x, y) {
+  if (!tooltipElement || !tooltipLayerElement || !tooltipContentElement) return;
+  
+  // Clear any existing fade-out animation
+  tooltipElement.classList.remove('fade-out');
+  
+  tooltipLayerElement.textContent = layerType;
+  tooltipContentElement.textContent = content;
+  
+  // Get canvas container bounds for relative positioning
+  const canvasContainer = document.getElementById('p5-wrap');
+  if (!canvasContainer) return;
+  
+  const containerRect = canvasContainer.getBoundingClientRect();
+  
+  // Position tooltip relative to canvas container
+  const relativeX = x - containerRect.left;
+  const relativeY = y - containerRect.top;
+  
+  tooltipElement.style.left = (relativeX + 10) + 'px';
+  tooltipElement.style.top = (relativeY - 10) + 'px';
+  
+  tooltipElement.classList.add('show');
+}
+
+function hideTooltip() {
+  if (!tooltipElement) return;
+  
+  // Add fade-out class for smooth transition
+  tooltipElement.classList.remove('show');
+  tooltipElement.classList.add('fade-out');
+  
+  // Remove fade-out class after animation completes
+  setTimeout(() => {
+    if (tooltipElement) {
+      tooltipElement.classList.remove('fade-out');
+    }
+  }, 300); // Match CSS transition duration
+}
+
+function clearTooltipTimeout() {
+  if (tooltipTimeout) {
+    clearTimeout(tooltipTimeout);
+    tooltipTimeout = null;
+  }
+}
+
+function scheduleTooltip(layerType, content, canvasX, canvasY) {
+  clearTooltipTimeout();
+  tooltipTimeout = setTimeout(() => {
+    showTooltip(layerType, content, canvasX, canvasY);
+  }, 800); // Show tooltip after 800ms hover
+}
+
 /* ---------- Mouse hover / exit ---------- */
 function mouseMoved() {
   if (!dataReady) return false;
@@ -2804,6 +2874,9 @@ function mouseMoved() {
   const rawHit = pickAt(mouseX, mouseY) || null;
   const resolved = resolveStableHover(rawHit, hoverHit);
 
+  // Check if we're actually hovering over something
+  const isHoveringOverElement = rawHit !== null;
+  
   hoverHit = resolved || null;
   lastHoverHit = hoverHit;
 
@@ -2811,7 +2884,56 @@ function mouseMoved() {
     hoverVotesHeader = false;
   }
 
-  // We’re in canvas now, so sidebar is no longer owning the hover visuals
+  // Handle tooltip display
+  if (hoverHit && isHoveringOverElement) {
+    let layerType = "";
+    let content = "";
+    
+    switch (hoverHit.type) {
+      case "indicator":
+        const ind = indicatorNodes[hoverHit.index];
+        if (ind) {
+          layerType = "Indicator";
+          content = ind.name;
+        }
+        break;
+      case "subcat":
+        layerType = "Subcategory";
+        content = hoverHit.sub;
+        break;
+      case "cat":
+        layerType = "Category";
+        content = hoverHit.cat;
+        break;
+      case "dim":
+        layerType = "Dimension";
+        content = hoverHit.dim;
+        break;
+      case "voteStable":
+        layerType = "Vote";
+        content = "Individual vote";
+        break;
+    }
+    
+    if (layerType && content) {
+      // Convert canvas coordinates to screen coordinates for tooltip positioning
+      const canvasContainer = document.getElementById('p5-wrap');
+      if (canvasContainer) {
+        const containerRect = canvasContainer.getBoundingClientRect();
+        const screenX = containerRect.left + mouseX;
+        const screenY = containerRect.top + mouseY;
+        scheduleTooltip(layerType, content, screenX, screenY);
+      }
+    }
+  } else {
+    // Clear hover state and tooltip when not hovering over any element
+    clearTooltipTimeout();
+    hideTooltip();
+    hoverHit = null;
+    lastHoverHit = null;
+  }
+
+  // We're in canvas now, so sidebar is no longer owning the hover visuals
   sidebarHoverActive = false;
 
   syncSidebarHover();
@@ -2822,6 +2944,10 @@ function mouseExited() {
   hoverHit = null;
   lastHoverHit = null;
   lastSidebarHoverSig = null;
+
+  // Hide tooltip when mouse leaves canvas
+  clearTooltipTimeout();
+  hideTooltip();
 
   document
     .querySelectorAll(".hoverSync")

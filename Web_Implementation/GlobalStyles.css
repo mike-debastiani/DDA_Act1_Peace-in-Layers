@@ -1,3 +1,20 @@
+/* ===================== Global Reset & Base Styles ===================== */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent page scrolling */
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 :root {
   /* Base Font Family */
   --font-family: 'IBM Plex Sans', sans-serif;
