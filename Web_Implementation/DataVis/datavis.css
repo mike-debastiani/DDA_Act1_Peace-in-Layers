@@ -61,8 +61,7 @@ body {
 
 /* ===== MAIN CONTENT LAYOUT ===== */
 .main-content {
-  margin-top: 78px; /* Account for fixed header */
-  height: calc(100vh - 78px);
+  height: calc(100vh - 88px);
   display: flex;
   flex-direction: column;
   gap: 16px; /* 16px gap between content and bottom controls */
@@ -72,7 +71,7 @@ body {
   flex: 1;
   display: flex;
   gap: 16px;
-  padding: 8px 24px 0 24px;
+  padding: 0 24px;
   overflow: hidden; /* Prevent overflow */
 }
 

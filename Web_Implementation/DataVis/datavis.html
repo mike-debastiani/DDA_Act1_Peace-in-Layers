@@ -10,24 +10,38 @@
 
   <body>
     <!-- HEADER -->
-    <header class="datavis-header">
-      <!-- LEFT Menu -->
-      <button id="backToCommunitiesBtn" class="btn btn-secondary">
-        <img src="../src/icons/backArrowIcon.svg" alt="Back Icon" class="btn-icon" style="width: 20px; height: 32px" />
-        Back to Communities
-      </button>
-
-      <!-- RIGHT Menu group -->
-      <div class="header-right">
-        <a href="../intro.html" class="btn btn-primary">
-          <img src="../src/icons/introIcon.svg" alt="Intro Icon" class="btn-icon" style="width: 41px; height: 9px" />
+    <header class="header-container">
+      <h1 class="header-title">Layers of Peace</h1>
+      
+      <div class="header-buttons">
+        <a href="../intro.html" class="header-btn header-btn-inactive">
+          <img src="../src/icons/introIcon.svg" alt="Intro" class="header-btn-icon-intro" />
           Intro
         </a>
-
+        <a href="../index.html" class="header-btn header-btn-inactive">
+          <img src="../src/icons/communityIcon.svg" alt="Communities" class="header-btn-icon-community" />
+          Communities
+        </a>
+        <div class="datavis-dropdown">
+          <a href="#" class="header-btn header-btn-active" id="datavisDropdownBtn">
+            <img src="../src/icons/datavisIconWhite.svg" alt="Datavis" class="header-btn-icon-large" />
+            Datavis
+          </a>
+          <div class="datavis-dropdown-content" id="datavisDropdownContent">
+            <a href="datavis.html?community=potoci" class="datavis-dropdown-item">Potoci</a>
+            <a href="datavis.html?community=zalik" class="datavis-dropdown-item">Zalik</a>
+            <a href="datavis.html?community=cim" class="datavis-dropdown-item">Cim</a>
+            <a href="datavis.html?community=cernica" class="datavis-dropdown-item">Cernica</a>
+            <a href="datavis.html?community=bijeli-brijeg" class="datavis-dropdown-item">Bijeli Brijeg</a>
+            <a href="datavis.html?community=podhum" class="datavis-dropdown-item">Podhum</a>
+            <a href="datavis.html?community=blagaj" class="datavis-dropdown-item">Blagaj</a>
+          </div>
+        </div>
+        
         <div class="menu-toggle">
           <div class="menu-container" id="menuContainer">
             <button class="menu-button" id="menuToggleBtn">
-              <img src="../src/icons/hamburgerMenuIcon.svg" alt="Menu" class="menu-icon" style="width: 28px; height: 18px" />
+              <img src="../src/icons/hamburgerIcon.svg" alt="Menu" class="header-btn-icon-menu" />
             </button>
 
             <div class="menu-content">
@@ -245,6 +259,35 @@
         // Navigate back to index.html
         window.location.href = '../index.html';
       });
+
+      // Datavis Dropdown functionality
+      const datavisDropdownBtn = document.getElementById('datavisDropdownBtn');
+      const datavisDropdownContent = document.getElementById('datavisDropdownContent');
+      let dropdownTimeout;
+
+      if (datavisDropdownBtn && datavisDropdownContent) {
+        datavisDropdownBtn.addEventListener('mouseenter', function() {
+          clearTimeout(dropdownTimeout);
+          datavisDropdownContent.classList.add('show');
+        });
+
+        datavisDropdownBtn.addEventListener('mouseleave', function() {
+          dropdownTimeout = setTimeout(function() {
+            datavisDropdownContent.classList.remove('show');
+          }, 150);
+        });
+
+        datavisDropdownContent.addEventListener('mouseenter', function() {
+          clearTimeout(dropdownTimeout);
+          datavisDropdownContent.classList.add('show');
+        });
+
+        datavisDropdownContent.addEventListener('mouseleave', function() {
+          dropdownTimeout = setTimeout(function() {
+            datavisDropdownContent.classList.remove('show');
+          }, 150);
+        });
+      }
     </script>
   </body>
 </html>

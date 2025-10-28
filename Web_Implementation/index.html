@@ -11,36 +11,53 @@
     <link rel="stylesheet" href="intro.css">
 </head>
 <body>
-    <header class="intro-header">
-        <!-- LEFT Menu -->
-        <h1 class="header-title">Peace in Layers</h1>
-
-        <!-- RIGHT Menu group -->
-        <div class="header-right">
-            <a href="intro.html" class="btn btn-primary">
-                <img src="src/icons/introIcon.svg" alt="Intro Icon" class="btn-icon" style="width: 41px; height: 9px" />
-                Intro
-            </a>
-
-            <div class="menu-toggle">
-                <div class="menu-container" id="menuContainer">
-                    <button class="menu-button" id="menuToggleBtn">
-                        <img src="src/icons/hamburgerMenuIcon.svg" alt="Menu" class="menu-icon" style="width: 28px; height: 18px" />
-                    </button>
-
-                    <div class="menu-content">
-                        <a href="#" class="menu-item">Home</a>
-                        <a href="#" class="menu-item">Credits</a>
-                        <div class="menu-item-with-arrow">
-                            <a href="#" class="menu-item">Language</a>
-                            <img src="src/icons/dropdownArrowIcon.svg" alt="Dropdown" style="width: 16px; height: 9px" />
-                        </div>
-                    </div>
-
-                    <img src="src/icons/closeIcon.svg" alt="Close" class="menu-close" id="menuCloseBtn" />
-                </div>
-            </div>
+    <header class="header-container">
+      <h1 class="header-title">Layers of Peace</h1>
+      
+      <div class="header-buttons">
+        <a href="intro.html" class="header-btn header-btn-inactive">
+          <img src="src/icons/introIcon.svg" alt="Intro" class="header-btn-icon-intro" />
+          Intro
+        </a>
+        <a href="index.html" class="header-btn header-btn-active">
+          <img src="src/icons/communityIconWhite.svg" alt="Communities" class="header-btn-icon-community" />
+          Communities
+        </a>
+        <div class="datavis-dropdown">
+          <a href="#" class="header-btn header-btn-inactive" id="datavisDropdownBtn">
+            <img src="src/icons/datavisIcon.svg" alt="Datavis" class="header-btn-icon-large" />
+            Datavis
+          </a>
+          <div class="datavis-dropdown-content" id="datavisDropdownContent">
+            <a href="DataVis/datavis.html?community=potoci" class="datavis-dropdown-item">Potoci</a>
+            <a href="DataVis/datavis.html?community=zalik" class="datavis-dropdown-item">Zalik</a>
+            <a href="DataVis/datavis.html?community=cim" class="datavis-dropdown-item">Cim</a>
+            <a href="DataVis/datavis.html?community=cernica" class="datavis-dropdown-item">Cernica</a>
+            <a href="DataVis/datavis.html?community=bijeli-brijeg" class="datavis-dropdown-item">Bijeli Brijeg</a>
+            <a href="DataVis/datavis.html?community=podhum" class="datavis-dropdown-item">Podhum</a>
+            <a href="DataVis/datavis.html?community=blagaj" class="datavis-dropdown-item">Blagaj</a>
+          </div>
         </div>
+        
+        <div class="menu-toggle">
+          <div class="menu-container" id="menuContainer">
+            <button class="menu-button" id="menuToggleBtn">
+              <img src="src/icons/hamburgerIcon.svg" alt="Menu" class="header-btn-icon-menu" />
+            </button>
+
+            <div class="menu-content">
+              <a href="#" class="menu-item">Home</a>
+              <a href="#" class="menu-item">Credits</a>
+              <div class="menu-item-with-arrow">
+                <a href="#" class="menu-item">Language</a>
+                <img src="src/icons/dropdownArrowIcon.svg" alt="Dropdown" style="width: 16px; height: 9px" />
+              </div>
+            </div>
+
+            <img src="src/icons/closeIcon.svg" alt="Close" class="menu-close" id="menuCloseBtn" />
+          </div>
+        </div>
+      </div>
     </header>
 
     <!-- Community Data Sections -->
@@ -60,7 +77,7 @@
                         <div class="impressions-header">
                             <h2 class="impressions-title">Impressions</h2>
                             <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
-                                <span>show full Photostory</span>
+                                <span>show full photostory</span>
                                 <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
                             </a>
                         </div>
@@ -88,7 +105,10 @@
                             </div>
                           </div>
                     </div>
-                    <a href="DataVis/datavis.html?community=potoci" class="btn btn-primary community-data-btn">Show Data of Potoci</a>
+                    <a href="DataVis/datavis.html?community=potoci" class="btn btn-primary community-data-btn">
+                        <img src="src/icons/datavisIconWhite.svg" alt="Data Visualization" style="width: 18px; height: 18px" />
+                        Data Visualization of Potoci
+                    </a>
                 </div>
                 <div class="map-container">
                     <img src="assets/Maps/MapPotoci.png" alt="Potoci Map" class="map-image" />
@@ -111,7 +131,7 @@
                         <div class="impressions-header">
                             <h2 class="impressions-title">Impressions</h2>
                             <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
-                                <span>show full Photostory</span>
+                                <span>show full photostory</span>
                                 <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
                             </a>
                         </div>
@@ -139,7 +159,10 @@
                             </div>
                           </div>
                     </div>
-                    <a href="DataVis/datavis.html?community=zalik" class="btn btn-primary community-data-btn">Show Data of Zalik</a>
+                    <a href="DataVis/datavis.html?community=zalik" class="btn btn-primary community-data-btn">
+                        <img src="src/icons/datavisIconWhite.svg" alt="Data Visualization" style="width: 18px; height: 18px" />
+                        Data Visualization of Zalik
+                    </a>
                 </div>
                 <div class="map-container">
                     <img src="assets/Maps/MapZalik.png" alt="Zalik Map" class="map-image" />
@@ -161,7 +184,7 @@
                         <div class="impressions-header">
                             <h2 class="impressions-title">Impressions</h2>
                             <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
-                                <span>show full Photostory</span>
+                                <span>show full photostory</span>
                                 <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
                             </a>
                         </div>
@@ -189,7 +212,10 @@
                             </div>
                         </div>
                     </div>
-                    <a href="DataVis/datavis.html?community=cim" class="btn btn-primary community-data-btn">Show Data of Cim</a>
+                    <a href="DataVis/datavis.html?community=cim" class="btn btn-primary community-data-btn">
+                        <img src="src/icons/datavisIconWhite.svg" alt="Data Visualization" style="width: 18px; height: 18px" />
+                        Data Visualization of Cim
+                    </a>
                 </div>
                 <div class="map-container">
                     <img src="assets/Maps/MapCim.png" alt="Cim Map" class="map-image" />
@@ -212,7 +238,7 @@
                         <div class="impressions-header">
                             <h2 class="impressions-title">Impressions</h2>
                             <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
-                                <span>show full Photostory</span>
+                                <span>show full photostory</span>
                                 <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
                             </a>
                         </div>
@@ -240,7 +266,10 @@
                             </div>
                         </div>
                     </div>
-                    <a href="DataVis/datavis.html?community=cernica" class="btn btn-primary community-data-btn">Show Data of Cernica</a>
+                    <a href="DataVis/datavis.html?community=cernica" class="btn btn-primary community-data-btn">
+                        <img src="src/icons/datavisIconWhite.svg" alt="Data Visualization" style="width: 18px; height: 18px" />
+                        Data Visualization of Cernica
+                    </a>
                 </div>
                 <div class="map-container">
                     <img src="assets/Maps/MapCernica.png" alt="Cernica Map" class="map-image" />
@@ -263,7 +292,7 @@
                         <div class="impressions-header">
                             <h2 class="impressions-title">Impressions</h2>
                             <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
-                                <span>show full Photostory</span>
+                                <span>show full photostory</span>
                                 <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
                             </a>
                         </div>
@@ -291,7 +320,10 @@
                             </div>
                           </div>
                     </div>
-                    <a href="DataVis/datavis.html?community=bijeli-brijeg" class="btn btn-primary community-data-btn">Show Data of Bijeli Brijeg</a>
+                    <a href="DataVis/datavis.html?community=bijeli-brijeg" class="btn btn-primary community-data-btn">
+                        <img src="src/icons/datavisIconWhite.svg" alt="Data Visualization" style="width: 18px; height: 18px" />
+                        Data Visualization of Bijeli Brijeg
+                    </a>
                 </div>
                 <div class="map-container">
                     <img src="assets/Maps/MapBijeliBrijeg.png" alt="Bijeli Brijeg Map" class="map-image" />
@@ -314,7 +346,7 @@
                         <div class="impressions-header">
                             <h2 class="impressions-title">Impressions</h2>
                             <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
-                                <span>show full Photostory</span>
+                                <span>show full photostory</span>
                                 <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
                             </a>
                         </div>
@@ -342,7 +374,10 @@
                             </div>
                           </div>
                     </div>
-                    <a href="DataVis/datavis.html?community=podhum" class="btn btn-primary community-data-btn">Show Data of Podhum</a>
+                    <a href="DataVis/datavis.html?community=podhum" class="btn btn-primary community-data-btn">
+                        <img src="src/icons/datavisIconWhite.svg" alt="Data Visualization" style="width: 18px; height: 18px" />
+                        Data Visualization of Podhum
+                    </a>
                 </div>
                 <div class="map-container">
                     <img src="assets/Maps/MapPodhum.png" alt="Podhum Map" class="map-image" />
@@ -365,7 +400,7 @@
                         <div class="impressions-header">
                             <h2 class="impressions-title">Impressions</h2>
                             <a href="https://everydaypeaceindicators.org/bosnia-herzegovina-photogallery/" class="photostory-link" target="_blank">
-                                <span>show full Photostory</span>
+                                <span>show full photostory</span>
                                 <img src="src/icons/openIcon.svg" alt="Open" style="width: 15px; height: 15px" />
                             </a>
                         </div>
@@ -393,7 +428,10 @@
                             </div>
                         </div>
                     </div>
-                    <a href="DataVis/datavis.html?community=blagaj" class="btn btn-primary community-data-btn">Show Data of Blagaj</a>
+                    <a href="DataVis/datavis.html?community=blagaj" class="btn btn-primary community-data-btn">
+                        <img src="src/icons/datavisIconWhite.svg" alt="Data Visualization" style="width: 18px; height: 18px" />
+                        Data Visualization of Blagaj
+                    </a>
                 </div>
                 <div class="map-container">
                     <img src="assets/Maps/MapBlagaj.png" alt="Blagaj Map" class="map-image" />
@@ -483,6 +521,35 @@
                 menuContainer.classList.remove('expanded');
             }
         });
+
+        // Datavis Dropdown functionality
+        const datavisDropdownBtn = document.getElementById('datavisDropdownBtn');
+        const datavisDropdownContent = document.getElementById('datavisDropdownContent');
+        let dropdownTimeout;
+
+        if (datavisDropdownBtn && datavisDropdownContent) {
+            datavisDropdownBtn.addEventListener('mouseenter', function() {
+                clearTimeout(dropdownTimeout);
+                datavisDropdownContent.classList.add('show');
+            });
+
+            datavisDropdownBtn.addEventListener('mouseleave', function() {
+                dropdownTimeout = setTimeout(function() {
+                    datavisDropdownContent.classList.remove('show');
+                }, 150);
+            });
+
+            datavisDropdownContent.addEventListener('mouseenter', function() {
+                clearTimeout(dropdownTimeout);
+                datavisDropdownContent.classList.add('show');
+            });
+
+            datavisDropdownContent.addEventListener('mouseleave', function() {
+                dropdownTimeout = setTimeout(function() {
+                    datavisDropdownContent.classList.remove('show');
+                }, 150);
+            });
+        }
     </script>
 </body>
 </html>

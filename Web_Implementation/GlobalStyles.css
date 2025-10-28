@@ -286,6 +286,12 @@
   background-color: var(--color-primary-light-hover);
 }
 
+/* Hide hamburger icon when menu is expanded */
+.menu-container.expanded .menu-button img {
+  opacity: 0;
+  visibility: hidden;
+}
+
 .menu-button {
   position: absolute;
   top: 0;
@@ -404,7 +410,140 @@
 .header-title {
   font-family: var(--font-family);
   font-weight: var(--weight-bold);
-  font-size: var(--text-4xl);
-  color: var(--color-primary);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+  color: var(--primary-500);
   margin: 0;
+}
+
+/* ===================== New Header Styles ===================== */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 24px;
+  box-sizing: border-box;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.header-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-family: var(--font-family);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+.header-btn-inactive {
+  background: var(--primary-50);
+  color: var(--primary-500);
+}
+
+.header-btn-inactive:hover {
+  background: var(--primary-100);
+}
+
+.header-btn-active {
+  background: var(--primary-500);
+  color: white;
+}
+
+.header-btn-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.header-btn-icon-intro {
+  width: 41px;
+  height: 8px;
+  flex-shrink: 0;
+}
+
+.header-btn-icon-community {
+  width: 24px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.header-btn-icon-large {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.header-btn-icon-menu {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* ===================== Datavis Dropdown Styles ===================== */
+.datavis-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.datavis-dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--grayscale-50);
+  min-width: 134px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 12px;
+  z-index: 1000;
+  margin-top: 8px;
+}
+
+.datavis-dropdown-content.show {
+  display: block;
+}
+
+.datavis-dropdown-item {
+  color: var(--text);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-family: var(--font-family);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-sm);
+  transition: background-color 0.2s ease;
+}
+
+.datavis-dropdown-item:hover {
+  background-color: var(--primary-50);
+  color: var(--primary-500);
+}
+
+.datavis-dropdown-item:first-child {
+  border-radius: 12px 12px 0 0;
+}
+
+.datavis-dropdown-item:last-child {
+  border-radius: 0 0 12px 12px;
+}
+
+/* ===================== Base Styles ===================== */
+body {
+  background-color: var(--text);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
 }

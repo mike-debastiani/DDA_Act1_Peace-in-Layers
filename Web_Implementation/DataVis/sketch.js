@@ -1256,7 +1256,7 @@ function pickAt(px, py) {
 
   pickGL.rotateX(isoRotX);
   pickGL.rotateY(isoRotY);
-  if (zoomed) pickGL.translate(0, -scrollY, 0);
+  if (currentZoomLevel > 1) pickGL.translate(0, -scrollY, 0);
 
   const halfStack = ((LAYERS.length - 1) * verticalGap) / 2;
 
@@ -2322,6 +2322,7 @@ function setup() {
   // canvas
   const cnv = createCanvas(W, H, WEBGL);
   cnv.parent(wrap);
+  cnv.pixelDensity(4);
   Object.assign(cnv.elt.style, {
     position: "absolute",
     inset: "0",
@@ -2359,7 +2360,7 @@ function setup() {
 
   // offscreen picking buffer
   pickGL = createGraphics(W, H, WEBGL);
-  pickGL.pixelDensity(1);
+  pickGL.pixelDensity(2);
   pickGL.setAttributes("alpha", false);
   pickGL.setAttributes("depth", true);
   pickGL.noLights();
@@ -2605,11 +2606,11 @@ function setup() {
     };
   }
 
-  // Segmented Zoom Controls (1.0x, 1.5x, 2.0x)
+  // Segmented Zoom Controls (1x, 2x, 3x)
   const zoomStepButtons = document.querySelectorAll(".zoom-step");
   zoomStepButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      const zoomValue = parseFloat(btn.dataset.zoom);
+      const zoomValue = parseInt(btn.dataset.zoom);
       currentZoomLevel = zoomValue;
       
       // Update active state
@@ -2692,7 +2693,7 @@ function resizeForWrap() {
   resizeCanvas(W, H);
 
   pickGL = createGraphics(W, H, WEBGL);
-  pickGL.pixelDensity(1);
+  pickGL.pixelDensity(2);
   pickGL.setAttributes("alpha", false);
   pickGL.setAttributes("depth", true);
   pickGL.noLights();
@@ -2702,7 +2703,8 @@ function resizeForWrap() {
 
 /* ---------- Wheel scroll while zoomed ---------- */
 function mouseWheel(e) {
-  if (!zoomed) return;
+  // Allow scrolling when zoomed in (level 2 or 3)
+  if (currentZoomLevel === 1) return;
   const halfStack = ((LAYERS.length - 1) * verticalGap) / 2;
   scrollY = clamp(scrollY + e.deltaY * SCROLL_PER_WHEEL, -halfStack, halfStack);
   return false;
@@ -2752,7 +2754,7 @@ function draw() {
   rotateY(isoRotY);
   if (autoRotate) rotateY(frameCount * 0.005);
 
-  if (zoomed) translate(0, -scrollY, 0);
+  if (currentZoomLevel > 1) translate(0, -scrollY, 0);
 
   const halfStack = ((LAYERS.length - 1) * verticalGap) / 2;
 
