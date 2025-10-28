@@ -138,102 +138,124 @@
       </button>
     </div>
     <script>
-      const sections = document.querySelectorAll(".intro-section");
-      const steps = document.querySelectorAll(".step");
-      const prevBtn = document.querySelector(".nav-prev");
-      const nextBtn = document.querySelector(".nav-next");
+      console.log('Script started loading...');
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM Content Loaded!');
+        
+        const sections = document.querySelectorAll(".intro-section");
+        const steps = document.querySelectorAll(".step");
+        const prevBtn = document.querySelector(".nav-prev");
+        const nextBtn = document.querySelector(".nav-next");
 
-      let currentIndex = 0;
+        let currentIndex = 0;
 
-      function showSection(index) {
-        sections.forEach((sec, i) => {
-          sec.classList.toggle("is-active", i === index);
-          steps[i]?.classList.toggle("is-active", i === index);
-        });
-      }
+        function showSection(index) {
+          sections.forEach((sec, i) => {
+            sec.classList.toggle("is-active", i === index);
+            steps[i]?.classList.toggle("is-active", i === index);
+          });
+        }
 
-      nextBtn.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % sections.length;
-        showSection(currentIndex);
-      });
-
-      prevBtn.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + sections.length) % sections.length;
-        showSection(currentIndex);
-      });
-
-      steps.forEach((step, i) => {
-        step.addEventListener("click", () => {
-          currentIndex = i;
+        nextBtn.addEventListener("click", () => {
+          currentIndex = (currentIndex + 1) % sections.length;
           showSection(currentIndex);
         });
-      });
 
-      // Add expanding menu functionality
-      const menuToggleBtn = document.getElementById('menuToggleBtn');
-      const menuContainer = document.getElementById('menuContainer');
-      const menuCloseBtn = document.getElementById('menuCloseBtn');
-      
-      // Toggle menu expansion on hamburger click
-      menuToggleBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        menuContainer.classList.toggle('expanded');
-      });
-      
-      // Close menu on close button click
-      menuCloseBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        menuContainer.classList.remove('expanded');
-      });
-      
-      // Close menu when clicking outside
-      document.addEventListener('click', function(e) {
-        if (!menuContainer.contains(e.target)) {
+        prevBtn.addEventListener("click", () => {
+          currentIndex = (currentIndex - 1 + sections.length) % sections.length;
+          showSection(currentIndex);
+        });
+
+        steps.forEach((step, i) => {
+          step.addEventListener("click", () => {
+            currentIndex = i;
+            showSection(currentIndex);
+          });
+        });
+
+        // Add expanding menu functionality
+        const menuToggleBtn = document.getElementById('menuToggleBtn');
+        const menuContainer = document.getElementById('menuContainer');
+        const menuCloseBtn = document.getElementById('menuCloseBtn');
+        
+        // Toggle menu expansion on hamburger click
+        menuToggleBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          menuContainer.classList.toggle('expanded');
+        });
+        
+        // Close menu on close button click
+        menuCloseBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
           menuContainer.classList.remove('expanded');
-        }
-      });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!menuContainer.contains(e.target)) {
+            menuContainer.classList.remove('expanded');
+          }
+        });
 
-      // Close Intro functionality - return to previous page
-      const closeIntroBtn = document.getElementById('closeIntroBtn');
-      closeIntroBtn.addEventListener('click', function() {
-        // Check if there's a referrer (previous page)
-        if (document.referrer && document.referrer !== window.location.href) {
-          // Go back to the previous page
-          history.back();
+        // Close Intro functionality - return to previous page
+        const closeIntroBtn = document.getElementById('closeIntroBtn');
+        if (closeIntroBtn) {
+          closeIntroBtn.addEventListener('click', function() {
+            // Check if there's a referrer (previous page)
+            if (document.referrer && document.referrer !== window.location.href) {
+              // Go back to the previous page
+              history.back();
+            } else {
+              // Fallback to index.html if no referrer
+              window.location.href = 'index.html';
+            }
+          });
+        }
+
+        // Datavis Dropdown functionality
+        console.log('Setting up datavis dropdown...');
+        const datavisDropdownBtn = document.getElementById('datavisDropdownBtn');
+        const datavisDropdownContent = document.getElementById('datavisDropdownContent');
+        let dropdownTimeout;
+
+        console.log('Datavis elements found:', {
+          btn: datavisDropdownBtn,
+          content: datavisDropdownContent
+        });
+
+        if (datavisDropdownBtn && datavisDropdownContent) {
+          console.log('Adding event listeners...');
+          datavisDropdownBtn.addEventListener('mouseenter', function() {
+            console.log('Mouse enter on datavis button');
+            clearTimeout(dropdownTimeout);
+            datavisDropdownContent.classList.add('show');
+          });
+
+          datavisDropdownBtn.addEventListener('mouseleave', function() {
+            console.log('Mouse leave on datavis button');
+            dropdownTimeout = setTimeout(function() {
+              datavisDropdownContent.classList.remove('show');
+            }, 150);
+          });
+
+          datavisDropdownContent.addEventListener('mouseenter', function() {
+            console.log('Mouse enter on dropdown content');
+            clearTimeout(dropdownTimeout);
+            datavisDropdownContent.classList.add('show');
+          });
+
+          datavisDropdownContent.addEventListener('mouseleave', function() {
+            console.log('Mouse leave on dropdown content');
+            dropdownTimeout = setTimeout(function() {
+              datavisDropdownContent.classList.remove('show');
+            }, 150);
+          });
+          console.log('Event listeners added successfully!');
         } else {
-          // Fallback to index.html if no referrer
-          window.location.href = 'index.html';
+          console.error('Datavis dropdown elements not found!');
         }
       });
-
-      // Datavis Dropdown functionality
-      const datavisDropdownBtn = document.getElementById('datavisDropdownBtn');
-      const datavisDropdownContent = document.getElementById('datavisDropdownContent');
-      let dropdownTimeout;
-
-      if (datavisDropdownBtn && datavisDropdownContent) {
-        datavisDropdownBtn.addEventListener('mouseenter', function() {
-          clearTimeout(dropdownTimeout);
-          datavisDropdownContent.classList.add('show');
-        });
-
-        datavisDropdownBtn.addEventListener('mouseleave', function() {
-          dropdownTimeout = setTimeout(function() {
-            datavisDropdownContent.classList.remove('show');
-          }, 150);
-        });
-
-        datavisDropdownContent.addEventListener('mouseenter', function() {
-          clearTimeout(dropdownTimeout);
-          datavisDropdownContent.classList.add('show');
-        });
-
-        datavisDropdownContent.addEventListener('mouseleave', function() {
-          dropdownTimeout = setTimeout(function() {
-            datavisDropdownContent.classList.remove('show');
-          }, 150);
-        });
-      }
     </script>
   </body>
 </html>

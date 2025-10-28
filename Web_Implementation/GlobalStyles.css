@@ -500,7 +500,7 @@
 }
 
 .datavis-dropdown-content {
-  display: none;
+  display: none !important;
   position: absolute;
   top: 100%;
   right: 0;
@@ -513,7 +513,7 @@
 }
 
 .datavis-dropdown-content.show {
-  display: block;
+  display: block !important;
 }
 
 .datavis-dropdown-item {
@@ -530,6 +530,12 @@
 .datavis-dropdown-item:hover {
   background-color: var(--primary-50);
   color: var(--primary-500);
+}
+
+/* Active community in dropdown (when on datavis page) */
+.datavis-dropdown-item.active {
+  background-color: var(--primary-500);
+  color: white;
 }
 
 .datavis-dropdown-item:first-child {

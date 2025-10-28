@@ -136,7 +136,7 @@ body {
 .bottom-controls-left {
   flex: 0 0 calc(3/7 * 100% + 40px); /* Same width as Detail Panel */
   display: flex;
-  justify-content: flex-end; /* Align content to right edge */
+  justify-content: space-between; /* Space between help button and clear button */
   align-items: center;
 }
 
@@ -178,6 +178,43 @@ body {
 .clearBtn:active {
   transform: translateY(0);
   background: var(--color-primary);
+}
+
+/* Help Button */
+.help-btn {
+  background: var(--grayscale-50);
+  color: var(--grayscale-300);
+  border: 0;
+  border-radius: 100px;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: var(--font-family);
+  font-weight: var(--weight-normal);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-normal);
+}
+
+.help-btn:hover {
+  background: var(--grayscale-100);
+  color: var(--grayscale-500);
+  transform: translateY(-1px);
+}
+
+.help-btn:active {
+  transform: translateY(0);
+  background: var(--grayscale-100);
+}
+
+.help-icon {
+  font-family: var(--font-family);
+  font-weight: var(--weight-normal);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-normal);
 }
 
 .zoom-controls {
