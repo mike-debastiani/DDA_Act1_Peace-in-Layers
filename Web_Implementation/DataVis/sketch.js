@@ -100,7 +100,7 @@ let SHOW_LABELS = true;
 
 /* ---------- Zoom ---------- */
 let zoomed = false;
-const VIEW_SIZE_BASE = 850;
+const VIEW_SIZE_BASE = 800;
 const VIEW_SIZE_ZOOM = 420;
 let scrollY = 0;
 const SCROLL_PER_WHEEL = 0.5;
@@ -120,6 +120,7 @@ const ZERO_IND_RADIUS = 0.8;
 const POINT_MARGIN = 0.8;
 const LIFT_DOTS = 0.8;
 const LIFT_TILES = 0.6;
+const MIN_CLICKABLE_RADIUS = 2.0; // Minimum clickable area for indicators
 
 /* ---------- Camera ---------- */
 let isoRotX, isoRotY;
@@ -719,6 +720,90 @@ function computeDotPositionsGridRect(count, w, d, radius) {
   return pts;
 }
 
+/* Grid layout for indicators with equal spacing */
+function placeIndicatorsGridRect(radii, w, d) {
+  const count = radii.length;
+  if (count <= 0) return [];
+
+  const usableW = Math.max(1, w - 4); // margin from edges
+  const usableD = Math.max(1, d - 4);
+
+  const aspect = usableW / usableD;
+  let cols = Math.max(1, Math.round(Math.sqrt(count * aspect)));
+  let rows = Math.max(1, Math.ceil(count / cols));
+
+  // Calculate spacing to ensure equal gaps with slightly increased spacing
+  const spacingFactor = 1.1; // Minimal increase in spacing
+  const spacingX = cols > 1 ? (usableW * spacingFactor) / (cols - 1) : 0;
+  const spacingZ = rows > 1 ? (usableD * spacingFactor) / (rows - 1) : 0;
+
+  const xMin = -usableW / 2;
+  const zMin = -usableD / 2;
+
+  const positions = [];
+  let placed = 0;
+
+  for (let r = 0; r < rows; r++) {
+    const remaining = count - placed;
+    const itemsThisRow = Math.min(cols, remaining);
+    if (itemsThisRow <= 0) break;
+
+    const z = rows > 1 ? zMin + spacingZ * r : 0;
+
+    for (let c = 0; c < itemsThisRow; c++) {
+      const x = itemsThisRow > 1 ? xMin + spacingX * c : 0;
+      positions.push({ 
+        x, 
+        z, 
+        r: radii[placed], 
+        idx: placed 
+      });
+      placed++;
+    }
+  }
+
+  return positions;
+}
+
+/* Grid layout for votes with equal spacing */
+function placeVotesGridRect(count, radius, w, d) {
+  if (count <= 0) return [];
+
+  const usableW = Math.max(1, w - 2 * radius - 2 * POINT_MARGIN);
+  const usableD = Math.max(1, d - 2 * radius - 2 * POINT_MARGIN);
+
+  const aspect = usableW / usableD;
+  let cols = Math.max(1, Math.round(Math.sqrt(count * aspect)));
+  let rows = Math.max(1, Math.ceil(count / cols));
+
+  // Calculate spacing to ensure equal gaps with slightly increased spacing
+  const spacingFactor = 1.1; // Minimal increase in spacing
+  const spacingX = cols > 1 ? (usableW * spacingFactor) / (cols - 1) : 0;
+  const spacingZ = rows > 1 ? (usableD * spacingFactor) / (rows - 1) : 0;
+
+  const xMin = -usableW / 2;
+  const zMin = -usableD / 2;
+
+  const positions = [];
+  let placed = 0;
+
+  for (let r = 0; r < rows; r++) {
+    const remaining = count - placed;
+    const itemsThisRow = Math.min(cols, remaining);
+    if (itemsThisRow <= 0) break;
+
+    const z = rows > 1 ? zMin + spacingZ * r : 0;
+
+    for (let c = 0; c < itemsThisRow; c++) {
+      const x = itemsThisRow > 1 ? xMin + spacingX * c : 0;
+      positions.push({ x, z });
+      placed++;
+    }
+  }
+
+  return positions;
+}
+
 /* Circle packing for indicators (layer 1) */
 function placeCirclesVariableRect(radii, w, d) {
   const items = radii.map((r, idx) => ({ r, idx })).sort((a, b) => b.r - a.r);
@@ -1098,8 +1183,8 @@ function initFromCSV(rows) {
     nameToIndicatorIndex.set(n.name, n.index);
   }
 
-  // pack circles
-  const indPositions = placeCirclesVariableRect(
+  // place indicators in grid layout
+  const indPositions = placeIndicatorsGridRect(
     indicatorNodes.map((n) => n.radius),
     PLATE_W,
     PLATE_D
@@ -1109,8 +1194,8 @@ function initFromCSV(rows) {
     indicatorNodes[i].z = indPositions[i].z;
   }
 
-  // layer 0: votes as small dots
-  const votePts = placeRandomNonOverlapRect(
+  // layer 0: votes as small dots in grid layout
+  const votePts = placeVotesGridRect(
     totalVotesT,
     DOT_RADIUS_VOTES,
     PLATE_W,
@@ -1267,7 +1352,9 @@ function pickAt(px, py) {
       pickGL.push();
       pickGL.translate(n.x, y + lift, n.z);
       pickGL.fill(r, g, b);
-      pickGL.cylinder(Math.max(0.5, n.radius), 1, 20, 1, true, true);
+      // Use minimum clickable radius for better clickability
+      const clickableRadius = Math.max(MIN_CLICKABLE_RADIUS, n.radius);
+      pickGL.cylinder(clickableRadius, 1, 20, 1, true, true);
       pickGL.pop();
     }
   }
