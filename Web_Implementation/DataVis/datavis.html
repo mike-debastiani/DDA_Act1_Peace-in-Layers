@@ -223,6 +223,19 @@
       </div>
     </div>
 
+    <!-- HELP OVERLAY -->
+    <div id="helpOverlay" class="help-overlay">
+      <div class="help-overlay-content">
+        <button id="closeHelpBtn" class="close-help-btn">
+          <img src="../src/icons/closeIcon.svg" alt="Close" class="close-icon" />
+          Close explanation
+        </button>
+        <div class="help-image-container">
+          <img src="../assets/images/DataExpl.svg" alt="Data Explanation" class="help-image" />
+        </div>
+      </div>
+    </div>
+
     <!-- LIBRARIES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.3/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
@@ -336,12 +349,47 @@
 
         // Help Button functionality
         const helpBtn = document.getElementById('helpBtn');
-        if (helpBtn) {
+        const helpOverlay = document.getElementById('helpOverlay');
+        const closeHelpBtn = document.getElementById('closeHelpBtn');
+        
+        if (helpBtn && helpOverlay && closeHelpBtn) {
+          // Open overlay when help button is clicked
           helpBtn.addEventListener('click', function() {
-            console.log('Help button clicked');
-            // Add your help functionality here
-            // For example: open a modal, show tooltips, etc.
+            console.log('Help button clicked - opening overlay');
+            helpOverlay.classList.add('show');
+            // Prevent body scroll when overlay is open
+            document.body.style.overflow = 'hidden';
           });
+
+          // Close overlay when close button is clicked
+          closeHelpBtn.addEventListener('click', function() {
+            console.log('Close help button clicked - closing overlay');
+            helpOverlay.classList.remove('show');
+            // Restore body scroll
+            document.body.style.overflow = '';
+          });
+
+          // Close overlay when clicking outside the content
+          helpOverlay.addEventListener('click', function(e) {
+            if (e.target === helpOverlay) {
+              console.log('Overlay background clicked - closing overlay');
+              helpOverlay.classList.remove('show');
+              // Restore body scroll
+              document.body.style.overflow = '';
+            }
+          });
+
+          // Close overlay with Escape key
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && helpOverlay.classList.contains('show')) {
+              console.log('Escape key pressed - closing overlay');
+              helpOverlay.classList.remove('show');
+              // Restore body scroll
+              document.body.style.overflow = '';
+            }
+          });
+        } else {
+          console.error('Help overlay elements not found!');
         }
       });
     </script>
