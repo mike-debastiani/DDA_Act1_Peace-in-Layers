@@ -395,7 +395,7 @@ body {
   margin-top: auto;
   margin-left: 0;
   position: absolute;
-  bottom: 32px;
+  bottom: 0px;
   background-color: transparent;
   color: var(--primary-500);
   border: none;

@@ -411,19 +411,10 @@ function outlinePlate(sizeX, sizeZ) {
   pop();
 }
 
-// draw thick orange outline around active layer's plate
+// drawLayerOutline function disabled - no more orange outline around selected layer
 function drawLayerOutline(layerIndex, halfStack) {
-  if (layerIndex == null) return;
-
-  function liftFor(i) {
-    return i <= 1 ? thickness / 2 + LIFT_DOTS : thickness / 2 + LIFT_TILES;
-  }
-  const yWorld = layerIndex * verticalGap - halfStack + liftFor(layerIndex);
-
-  push();
-  translate(0, yWorld, 0);
-  outlinePlate(PLATE_W / 2, PLATE_D / 2);
-  pop();
+  // Function disabled - no outline will be drawn
+  return;
 }
 
 /* ---------- "Select all votes" ---------- */
@@ -1872,10 +1863,10 @@ function drawTreemapLayer(layerIndex, grid, halfStack) {
     const inSel = tileInSelectionGlobal(t);
 
     if (hovered) {
-      // Match panel hover styling: exact same background as pill hover
-      fill(239, 228, 220);
+      // Match panel hover styling: primary-50 background with primary-500 border
+      fill(254, 240, 230, 255); // #FEF0E6 - primary-50
       stroke(CLR_ACTIVE[0], CLR_ACTIVE[1], CLR_ACTIVE[2], 255);
-      strokeWeight(0.5); // Thinner stroke to match pill border
+      strokeWeight(0.3); // Thin stroke to match pill border
     } else if (inSel) {
       fill(CLR_ACTIVE[0], CLR_ACTIVE[1], CLR_ACTIVE[2], 210);
       noStroke();
@@ -2926,11 +2917,9 @@ function mouseMoved() {
       }
     }
   } else {
-    // Clear hover state and tooltip when not hovering over any element
+    // Clear tooltip when not hovering over any element, but keep hoverHit for sidebar sync
     clearTooltipTimeout();
     hideTooltip();
-    hoverHit = null;
-    lastHoverHit = null;
   }
 
   // We're in canvas now, so sidebar is no longer owning the hover visuals

@@ -556,10 +556,11 @@ body {
   font-size: var(--text-sm);
 }
 
-.pill:hover {
-  background: var(--pill-hover);
-  border: 1px solid var(--primary-500) !important;
-}
+  .pill:hover {
+    background: var(--primary-50);
+    border: 1px solid var(--primary-500) !important;
+    color: var(--primary-500);
+  }
 .pill.active {
   background: var(--color-primary);
   border-color: var(--color-primary);
@@ -700,14 +701,15 @@ body {
   opacity: 1;
 }
 
-/* pill hoverSync stays the same look */
+/* pill hoverSync matches normal hover styling */
 .pill.hoverSync {
-  background: rgba(249, 119, 26, 0.1);
+  background: var(--primary-50);
   border: 1px solid var(--primary-500) !important;
-  color: var(--color-primary) !important;
+  color: var(--primary-500);
 }
 .pill.hoverSync .pillCount {
-  color: var(--color-primary) !important;
+  color: var(--primary-500);
+  opacity: 0.75;
 }
 
 /* Orange outline around the "Votes" header when active */
