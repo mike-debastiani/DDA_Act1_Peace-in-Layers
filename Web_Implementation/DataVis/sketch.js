@@ -69,9 +69,9 @@ function getCSSRGB(prop) {
 
 // Initialize color constants from CSS variables
 const CLR_BG = getCSSRGB('--clr-bg') || [247, 247, 247]; // Same as panel background
-const CLR_DOTS = getCSSRGB('--clr-dots') || [180, 180, 180];
-const CLR_PLATES = getCSSRGB('--clr-plates') || [210, 210, 210];
-const CLR_TILE = getCSSRGB('--clr-tile') || [190, 190, 190];
+const CLR_DOTS = [202, 202, 202]; // #CACACA - grayscale-200
+const CLR_PLATES = [202, 202, 202]; // #CACACA - grayscale-200
+const CLR_TILE = [202, 202, 202]; // #CACACA - grayscale-200
 
 // Get primary color RGB values
 const CLR_ACTIVE_R = parseInt(getCSSVariable('--clr-active-r')) || 249;
@@ -1785,7 +1785,7 @@ function drawIndicatorsLayer(layerIndex, nodes, halfStack, indicatorSet) {
     } else if (isSelected) {
       fill(CLR_ACTIVE[0], CLR_ACTIVE[1], CLR_ACTIVE[2], 230);
     } else {
-      fill(160, 160, 160, 220);
+      fill(CLR_DOTS[0], CLR_DOTS[1], CLR_DOTS[2], 220);
     }
 
     push();
